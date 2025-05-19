@@ -1,6 +1,0 @@
-User-agent: *
-Allow: /
-
-Host: https://plant.base/
-
-Sitemap: https://plantbase.green/sitemap.xml
