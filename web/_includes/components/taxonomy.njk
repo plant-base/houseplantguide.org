@@ -1,0 +1,53 @@
+{% macro taxonomy(params) %}
+<div id="taxonomy-card">
+    <ul class="rounded outline shadow foreground">
+        <li>
+            <p>Family <a id="familia-taxon" href="../../familiae/{{ params.familia_slug }}">{{ params.familia }}</a></p>
+        </li>
+
+        {%- if params.genus -%}
+        <li>
+            <p>Genus <a id="genus-taxon" href="../../genera/{{ params.genus_slug }}">{{
+                params.genus }}</a></p>
+        </li>
+        {%- else -%}
+        <li>
+        </li>
+        {%- endif -%}
+
+        {%- if params.species -%}
+        <li>
+            <p>Species <a id="species-taxon" href="../{{ params.species_slug }}">{{
+                params.species }}</a></p>
+        </li>
+        {%- else -%}
+        <li>
+        </li>
+        {%- endif -%}
+
+        <li>
+            <hr style="margin-top: 1em; margin-bottom: 1em;">
+        </li>
+        <li>
+            <div>
+               {%- if params.common_names and params.common_names | length -%}
+  <p style="margin-bottom: 0;">
+    Also known as {{ params.common_names | formatCommonNames }}.
+  </p>
+{%- else -%}
+  <p class="no-info" style="margin-bottom: 0;">No common names are known.</p>
+{%- endif -%}
+
+            </div>
+        </li>
+        <li>
+            {%- if params.etymology | length > 0 -%}
+           <div id="etymology">
+    <p style="margin-bottom: 0;">{{ params.etymology | emphasizeQuotes | safe }}</p>
+</div>
+
+            {%- endif -%}
+        </li>
+    </ul>
+</div>
+{% endmacro %}

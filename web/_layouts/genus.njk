@@ -1,0 +1,175 @@
+---
+layout: base.njk
+index: true
+eleventyComputed:
+    icon: 🌱
+    title: "{{ name }} Houseplants | Genus Info & Species List"
+    genus_slug: "{{ name | slug }}"
+    familia_slug: "{{ familia | slug }}"
+    permalink: /genera/{{ genus_slug }}/
+    description: "Discover houseplants in the {{ name }} genus. Explore care tips, species list, and indoor plant guidance for plants in the {{ name }} genus."
+---
+
+<!-- PAGEFIND EXCERPT -->
+<span style="display: none" data-pagefind-meta="title">{{ name }}</span>
+{%- if common_names -%}
+    <span style="display: none" data-pagefind-body>{{ name }}. Known as {{ common_names }}</span>
+{%- else -%}
+    <span style="display: none" data-pagefind-body>{{ name }}.</span>
+{%- endif -%}
+<span style="display: none" data-pagefind-filter="filter">Genera</span>
+
+<!--<div class="sticky species-header">-->
+<!--    <div class="unstuck">-->
+<!--        <div class="page">-->
+<!--            <h1 class="page-content">The {{ name }} genus</h1>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="stuck">-->
+<!--        <div>-->
+<!--            <h1>{{ name }}</h1>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<div class="page">
+    <h1 class="page-content">{{ name }}</h1>
+</div>
+
+<div class="page">
+    <div class="page-content">
+        <main id="article">
+            <div id="description-cards" class="flex row gap">
+                {%- set has_image = genus_slug | checkGenusImage %}
+                {%- if has_image -%}
+                    <div id="species-image" class="flex column small-gap" style="max-height: 50%;">
+                        <div class="image-container flex expand rounded">
+                            {% genusImage genus_slug, "{{ name }}", "(min-width: 30em) 50vw, 100vw", attribution, "100%" %}
+                        </div>
+                    </div>
+                {%- endif -%}
+
+                <div class="flex column small-gap">
+                    {%- from "components/taxonomy.njk" import taxonomy -%}
+                    {{ taxonomy({ genus: name, genus_slug: genus_slug, familia: familia, familia_slug: familia_slug,
+                    common_names: common_names, etymology: etymology }) }}
+{# 
+                    {%- if description | length > 0 -%}
+                        <div class="flex rounded background outline shadow" style="padding: 0.8em;">
+                            <p style="font-style: italic; margin-bottom: 0;">{{ description }}</p>
+                        </div>
+                    {%- endif -%} #}
+
+                </div>
+            </div>
+
+            <!-- SPECIES -->
+            <h2 id="species">Species</h2>
+            <p>The {{ name }} genus has a total of {{ collections[genus_slug].length }} species recorded in
+                Plantbase.</p>
+            <div id="species-grid">
+                {%- for post in collections[genus_slug] | sort(false, false, "data.title") -%}
+                    <div style="display: flex; flex-direction: row;">
+                        <a href="{{  post.url }}" style="display: flex">
+                            {% speciesThumbnail post.data.species_slug, "ALT", "(min-width: 3em) 50vw, 50vw" %}
+                            <div style="display: flex; flex-direction: column; margin-left: 1em;">
+                                <p style="font-weight: bold; margin-bottom: 0.2em;">{{ post.data.name }}</p>
+                                {%- if post.data.common_names -%}
+                                    <p>Known as {{ post.data.common_names }}</p>
+                                {%- endif -%}
+                            </div>
+                        </a>
+                    </div>
+                {%- endfor -%}
+            </div>
+
+            <!-- SOURCES -->
+            <div id="sources">
+                <h2 id="sources-header" class="flex align-center">
+                    <a href="#sources"><img class="header-icon" src="/web/assets/icons/book.svg" alt="Book icon"/></a>
+                    Sources
+                </h2>
+                <h4>Wikipedia | The Free Encyclopedia</h4>
+                <p style="word-wrap: break-word;"><a href="https://en.wikipedia.org/wiki/{{ name }}" target="_blank"
+                                                     rel="noopener noreferrer">https://en.wikipedia.org/wiki/{{ name }}</a>
+                </p>
+                <h4>Kew | Plants of the World Online</h4>
+                <p style="word-wrap: break-word;"><a href="https://powo.science.kew.org/results?q={{ name }}"
+                                                     target="_blank"
+                                                     rel="noopener noreferrer">https://powo.science.kew.org/results?q={{ name }}</a>
+                </p>
+                <h4>GBIF | Global Biodiversity Information Facility</h4>
+                <p style="word-wrap: break-word;"><a href="https://www.gbif.org/search?q={{ name }}" target="_blank"
+                                                     rel="noopener noreferrer">https://www.gbif.org/search?q={{ name }}</a>
+                </p>
+                {%- if (sources | length > 0) -%}
+                <h4>Other Sources</h4>
+                {%- for source in sources -%}
+                <p style="word-wrap: break-word;"><a href="{{ source }}" target="_blank" rel="noopener noreferrer">{{
+                    source
+                    }}</a></p>
+                {%- endfor -%}
+                {% endif %}
+            </div>
+        </main>
+
+        <div id="table-of-contents">
+            <nav>
+                <ul>
+                    <li>
+                        <a href="#description">{{ name }}</a>
+                    </li>
+                    <li>
+                        <a href="#species">Species</a>
+                    </li>
+                    <li><a href="#sources">Sources</a></li>
+                </ul>
+            </nav>
+            <button id="share-button" class="small">Share this page</button>
+        </div>
+
+    </div>
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "{{ name }} Houseplants Information",
+  "url": "https://houseplantguide.org/genera/{{ genus_slug }}/",
+  "description": "Explore houseplants in the genus {{ name }}. Care guides, species info, light, watering, and more.",
+  "mainEntity": {
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What family does {{ name }} belong to?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "{{ name }} belongs to the {{ familia }} family."
+        }
+      }
+      {%- if common_names -%},
+      {
+        "@type": "Question",
+        "name": "What is {{ name }} commonly called?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "{{ name }} is commonly called {{ common_names }}."
+        }
+      }
+      {%- endif -%}
+      {%- if etymology -%},
+      {
+        "@type": "Question",
+        "name": "Where does the name of {{ name }} come from?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "{{ etymology }}"
+        }
+      }
+      {%- endif -%}
+    ]
+  }
+}
+</script>

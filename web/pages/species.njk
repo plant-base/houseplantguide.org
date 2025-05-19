@@ -1,0 +1,43 @@
+---
+icon: 🌱
+permalink: '/species/'
+layout: base.njk
+title: All Houseplant Species | Complete Indoor Plant Care List
+description: Browse all houseplant species with detailed care instructions. Learn about watering, soil, light, toxicity, and growing conditions for each plant.
+---
+
+<div class="page">
+    <div class="page-content">
+        <main id="species" style="width: 100%;">
+            <h1 class="flex align-center">Plant Species</h1>
+            <p>Find plants across {{ collections.species.length }} species and {{
+                collections.genera.length }} genera.</p>
+
+            {%- for c in collections.genera | sort(false, false, "data.genus") -%}
+            <h4>{{c.data.genus}}</h4>
+
+            <div class="species-cards">
+                {% for post in collections[c.data.genus_slug] | sort(false, false, "data.title") %}
+                <a aria-label="{{ post.data.title }}" href="{{ post.url }}">
+                    <div class="species-card background outline rounded shadow">
+                        <div class="species-card-image">
+                            {% speciesImage post.data.species_slug, post.data.title, "(min-width: 1000px) 209px,
+                            (min-width:
+                            580px) 149px,
+                            (min-width: 460px) 119px, (min-width: 380px) 101px" %}
+                        </div>
+                    </div>
+                    <div class="species-card-wrapper">
+                        <div class="species-card-text foreground">
+                            <p>{{ post.data.title }}</p>
+                        </div>
+                    </div>
+
+                </a>
+                {%- endfor -%}
+            </div>
+            {%- endfor -%}
+        </main>
+
+    </div>
+</div>

@@ -1,0 +1,28 @@
+---
+# Metadata comes from _data/metadata.json
+permalink: "{{ metadata.feed.path }}"
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>{{ metadata.feed.title }}</title>
+  <subtitle>{{ metadata.feed.subtitle }}</subtitle>
+  <link href="{{ metadata.feed.url }}" rel="self"/>
+  <link href="{{ metadata.url }}"/>
+  <updated>{{ collections.posts | getNewestCollectionItemDate | dateToRfc3339 }}</updated>
+  <id>{{ metadata.url }}</id>
+  <author>
+    <name>{{ metadata.author.name }}</name>
+    <email>{{ metadata.author.email }}</email>
+  </author>
+  {%- for note in collections.posts | reverse %}
+  {% set absoluteNoteUrl %}{{ note.url | url | absoluteUrl(metadata.url) }}{% endset %}
+  <entry>
+    <title>{{ note.data.title }}</title>
+    <link href="{{ absoluteNoteUrl }}"/>
+    <updated>{{ note.date | dateToRfc3339 }}</updated>
+    <id>{{ absoluteNoteUrl }}</id>
+    <content type="html">{{ note.templateContent | htmlToAbsoluteUrls(absoluteNoteUrl) }}</content>
+  </entry>
+  {%- endfor %}
+</feed>

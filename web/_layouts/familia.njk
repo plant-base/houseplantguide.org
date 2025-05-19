@@ -1,0 +1,152 @@
+---
+layout: base.njk
+index: true
+eleventyComputed:
+    icon: 🌱
+    title: "{{ name }} Plant Family | Common Houseplants & Care"
+    familia_slug: "{{ name | slug }}"
+    permalink: /familiae/{{ familia_slug }}/
+    description: "Discover houseplants in the {{ name }} family. Explore care tips, genus list, and indoor plant guidance for plants in the {{ name }} family."
+---
+
+<!-- PAGEFIND EXCERPT -->
+<span style="display: none" data-pagefind-meta="title">{{ name }}</span>
+{%- if common_names -%}
+    <span style="display: none" data-pagefind-body>{{ name }}. Known as {{ common_names }}</span>
+{%- else -%}
+    <span style="display: none" data-pagefind-body>{{ name }}.</span>
+{%- endif -%}
+<span style="display: none" data-pagefind-filter="filter">Familiae</span>
+
+<div class="page">
+    <h1 class="page-content">{{ name }}</h1>
+</div>
+
+<div class="page">
+    <div class="page-content">
+        <main id="article">
+            <div id="description-cards" class="flex row gap">
+                {%- set has_image = familia_slug | checkFamiliaImage %}
+                {%- if has_image -%}
+                    <div id="species-image" class="flex column small-gap">
+                        <div class="image-container expand rounded">
+                            {% familiaImage familia_slug, "{{ name }}", "(min-width: 30em) 50vw, 100vw", attribution,
+                        "100%" %}
+                        </div>
+                    </div>
+                {%- endif -%}
+
+                <div class="flex column small-gap">
+
+                    {%- from "components/taxonomy.njk" import taxonomy -%}
+                    {{ taxonomy({ familia: name, familia_slug: familia_slug, common_names: common_names, etymology:
+                    etymology
+                    }) }}
+
+                    {# {%- if description | length > 0 -%}
+                        <div class="flex rounded background outline shadow" style="padding: 0.8em;">
+                            <p style="font-style: italic; margin-bottom: 0;">{{ description }}</p>
+                        </div>
+                    {%- endif -%} #}
+                </div>
+            </div>
+
+            <!-- GENERA -->
+            <h2 id="genera">Genera</h2>
+            <p>The {{ name }} family has a total of {{ collections[familia_slug].length }} genera recorded in Plantbase.</p>
+            <div id="taxonomy-collection" class="rounded background outline shadow" style="padding: 0.5em;">
+                <div id="taxonomy-list" style="display: flex">
+                    <ul>
+                        {%- for genus in collections[familia_slug] | sort(false, false, "data.title") -%}
+                            <li>
+                                <p>
+                                    <a id="genus-taxon" href="{{ genus.url }}">{{ genus.data.name }}</a>
+                                </p>
+                            </li>
+                        {%- endfor -%}
+                    </ul>
+                </div>
+            </div>
+
+            <!-- SOURCES -->
+            <div id="sources">
+                <h2 id="sources-header" class="flex align-center">
+                    <a href="#sources"><img class="header-icon" src="/web/assets/icons/book.svg" alt="Book icon"/></a>
+                    Sources
+                </h2>
+                <h4>Wikipedia | The Free Encyclopedia</h4>
+                <p style="word-wrap: break-word;"><a href="https://en.wikipedia.org/wiki/{{ name }}" target="_blank"
+                                                     rel="noopener noreferrer">https://en.wikipedia.org/wiki/{{ name }}</a>
+                </p>
+                <h4>Kew | Plants of the World Online</h4>
+                <p style="word-wrap: break-word;"><a href="https://powo.science.kew.org/results?q={{ name }}"
+                                                     target="_blank"
+                                                     rel="noopener noreferrer">https://powo.science.kew.org/results?q={{ name }}</a>
+                </p>
+                <h4>GBIF | Global Biodiversity Information Facility</h4>
+                <p style="word-wrap: break-word;"><a href="https://www.gbif.org/search?q={{ name }}" target="_blank"
+                                                     rel="noopener noreferrer">https://www.gbif.org/search?q={{ name }}</a>
+                </p>
+                {%- if (sources | length > 0) -%}
+                <h4>Other Sources</h4>
+                {%- for source in sources -%}
+                <p style="word-wrap: break-word;"><a href="{{ source }}" target="_blank" rel="noopener noreferrer">{{
+                    source
+                    }}</a></p>
+                {%- endfor -%}
+                {% endif %}
+            </div>
+        </main>
+
+        <div id="table-of-contents">
+            <nav>
+                <ul>
+                    <li>
+                        <a href="#description">{{ name }}</a>
+                    </li>
+                    <li>
+                        <a href="#genera">Genera</a>
+                    </li>
+                    <li><a href="#sources">Sources</a></li>
+                </ul>
+            </nav>
+            <button id="share-button" class="small">Share this page</button>
+
+        </div>
+    </div>
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "{{ name }} Houseplants Information",
+  "url": "https://houseplantguide.org/familiae/{{ familia_slug }}/",
+  "description": "Discover houseplants in the {{ name }} family. Care tips, genus list, and indoor plant guidance.",
+  "mainEntity": {
+    "@type": "FAQPage",
+    "mainEntity": [
+      {%- if common_names -%}
+      {
+        "@type": "Question",
+        "name": "What is {{ name }} commonly called?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "{{ name }} is commonly called {{ common_names }}."
+        }
+      }
+      {%- endif -%}
+      {%- if etymology -%},
+      {
+        "@type": "Question",
+        "name": "Where does the name of {{ name }} come from?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "{{ etymology }}"
+        }
+      }
+      {%- endif -%}
+    ]
+  }
+}
+</script>

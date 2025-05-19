@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- HEAD -->
+<head>
+    {% include "head.njk" %}
+</head>
+
+<!-- BODY -->
+{%- if index -%}
+<body class="light fade-in">
+{%- else -%}
+<body class="light fade-in">
+{%- endif -%}
+
+<!-- BANNER -->
+<!--<div id="banner">-->
+<!--    <p>Please stand by while we grow Plantbase 🌱</p>-->
+<!--</div>-->
+
+{% include "navbar.njk" %}
+
+<div>
+    <div>
+        {{ content | safe }}
+    </div>
+</div>
+
+{% include "footer.njk" %}
+
+<!-- SEARCH MODAL -->
+<div id="search-modal" class="aria-hidden:hidden grid-area" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="title" aria-hidden="false" data-a11y-dialog="search-dialog">
+    <div style="opacity: 0.5; background-color: rgba(0, 0, 0, 0.4); width: 100%; position: fixed; inset: 0;" data-a11y-dialog-hide></div>
+    <div id="modal_content" class="outline border rounded">
+        <!-- SEARCH BOX -->
+        <div id="search-box"></div>
+        <!-- INSTRUCTIONS -->
+        <div class="touchscreen:hidden" style="padding: 0.6rem; border-top: 1px solid var(--border);">
+            <p style="padding: 0; margin: 0; font-size: x-small;">Type <kbd>/</kbd> or <kbd><span class="meta-key-symbol">⌘K</span></kbd> to open, <kbd>esc</kbd> to close.</p>
+        </div>
+    </div>
+</div>
+
+<div id="tally-button">
+    <button data-tally-open="nGg9kz" data-tally-emoji-text="🌿" data-tally-emoji-animation="wave">+ add a plant</button>
+</div>
+
+
+
+
+<script type="text/javascript">
+    function labelShortcut() {
+        const els = Array.from(document.body.querySelectorAll('.meta-key-symbol'));
+
+        for (const el of els) {
+            el.textContent = navigator.platform.includes('Mac') ? '⌘K' : 'Ctrl+K';
+        }
+    }
+
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    const isApple = /apple/i.test(navigator.vendor);
+
+    const searchModal = document.body.querySelector('#search-modal');
+    const searchModalTrigger = document.body.querySelector('#search-button');
+    const dialog = new A11yDialog(searchModal);
+    const searchBox = searchModal.querySelector("#search-box");
+
+    labelShortcut();
+
+    addEventsToDOMAPIDialog(searchModal);
+
+    new PagefindUI({
+        element: searchBox,
+        showSubResults: false,
+        showImages: true,
+        resetStyles: false,
+        excerptLength: 20,
+        translations: {
+            placeholder: "Search Plantbase ...",
+            zero_results: "Could not find any results for \"[SEARCH_TERM]\""
+        }
+    });
+
+    const input = searchModal.querySelector(".pagefind-ui__search-input")
+
+    searchModal.addEventListener("show", () => {
+       // if (window.bodyScrollLock.disableBodyScroll) {
+         //   window.bodyScrollLock.disableBodyScroll(searchDialog)
+        //}
+
+        document.documentElement.removeEventListener("keydown", listenForShowShortcut)
+
+        if (!isMobile || !isApple) {
+            input.focus()
+        }
+    })
+
+    searchModal.addEventListener("hide", () => {
+        input.value = ""
+
+        input.dispatchEvent(new Event("input", { bubbles: true }));
+
+        document.documentElement.addEventListener("keydown", listenForShowShortcut)
+
+     //   if (window.bodyScrollLock.enableBodyScroll) {
+       //     window.bodyScrollLock.enableBodyScroll(searchDialog)
+       // }
+    })
+
+
+
+    function addEventsToDOMAPIDialog(el) {
+        const showEvent = new CustomEvent("show");
+        const hideEvent = new CustomEvent("hide");
+
+        const observer = new MutationObserver((mutationList) => {
+            mutationList.forEach(({ attributeName, target }) => {
+                if (attributeName !== "aria-hidden") {
+                    return
+                }
+
+                if (target.getAttribute("aria-hidden") === "true") {
+                    target.dispatchEvent(hideEvent);
+                    return
+                }
+
+                target.dispatchEvent(showEvent);
+            });
+        });
+
+        observer.observe(el, { attributes: true });
+    }
+
+    function listenForShowShortcut(event) {
+        const { isComposing, key } = event
+
+        if (isComposing || event.getModifierState("Alt")) {
+            return
+        }
+
+        const slash = key === "/" &&
+            !event.getModifierState("Control") &&
+            !event.getModifierState("Meta")
+
+        const ctrlOrCmdK = key === "k" && (event.getModifierState("Control") || event.getModifierState("Meta"))
+
+        if (!slash && !ctrlOrCmdK) {
+            return
+        }
+
+        event.preventDefault()
+
+        dialog.show()
+
+       // window?.fathom?.trackEvent(`Search Dialog|Show|${slash ? 'Slash' : 'Ctrl- or Cmd-K'}`);
+    }
+
+    // $(document).ready(function () {
+    //
+    //
+    //     searchModalTrigger.click(function (ev) {
+    //         ev.preventDefault();
+    //
+    //         // MicroModal.show('search-modal', {
+    //         //     onClose: function () {
+    //         //         // $('.nav-link-contact').blur();
+    //         //     },
+    //         //     disableFocus: true
+    //         // });
+    //
+    //         document.querySelector('.pagefind-ui__search-input').focus();
+    //     });
+    //
+    // })
+    // ;
+</script>
+</body>
+</html>

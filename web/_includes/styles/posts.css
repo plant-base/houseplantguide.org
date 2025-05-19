@@ -1,0 +1,22 @@
+.guide #taxonomy-card {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+#table-of-contents ul li ul {
+    margin-top: 1em;
+}
+
+
+
+/* .guide img {
+    border-radius: 4px;
+    object-fit: cover;
+    max-width: 10em;
+} */
+
+.guide p {
+    line-height: 2rem;
+}
+
+

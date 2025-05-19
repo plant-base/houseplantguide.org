@@ -1,0 +1,108 @@
+<div class="nav-bar">
+    <div>
+        <!-- DESKTOP NAVBAR -->
+        <nav id="navbar-desktop">
+            <div class="nav-bar-content">
+                <!-- LEFT SECTION -->
+                <section id="logo">
+                    <div class="flex top-row">
+                        <a class="flex" href="/" style="align-items: center;">
+                            <!--                <svg class="plantbase-icon" xmlns="http://www.w3.org/2000/svg" width="27.65182" height="28.4169" viewBox="0 0 27.65182 28.4169" creator="Katerina Limpitsouni"><path d="M13.5504,19.26321c2.52209-4.57641,5.04418-9.15282,7.56627-13.72923,.63116-1.14525,.31724-2.779-.89688-3.42047-1.17314-.61982-2.74636-.32632-3.42047,.89688-2.52209,4.57641-5.04418,9.15282-7.56627,13.72923-.63116,1.14525-.31724,2.779,.89688,3.42047,1.17314,.61982,2.74636,.32632,3.42047-.89688h0Z" fill="#181c1f" origin="undraw"/><path d="M4.63518,17.46454c2.52209-4.57641,5.04418-9.15282,7.56627-13.72923,.63116-1.14525,.31724-2.779-.89688-3.42047-1.17314-.61982-2.74636-.32632-3.42047,.89688C5.36201,5.78813,2.83991,10.36454,.31782,14.94095c-.63116,1.14525-.31724,2.779,.89688,3.42047,1.17314,.61982,2.74636,.32632,3.42047-.89688h0Z" fill="#181c1f"/><path d="M19.76772,27.20518c2.52209-4.57641,5.04418-9.15282,7.56627-13.72923,.63116-1.14525,.31724-2.779-.89688-3.42047-1.17314-.61982-2.74636-.32632-3.42047,.89688-2.52209,4.57641-5.04418,9.15282-7.56627,13.72923-.63116,1.14525-.31724,2.779,.89688,3.42047,1.17314,.61982,2.74636,.32632,3.42047-.89688h0Z" fill="#181c1f"/></svg>-->
+                            <p>Plantbase</p>
+                        </a>
+                        <!--                        <p style="font-family: Inconsolata, monospace; font-size: 1em; margin-left: 0.6em; font-weight: normal;">-->
+                        <!--                            / {{ title }}</p>-->
+                    </div>
+                </section>
+
+
+                <!-- END SECTION -->
+                <section id="nav-end" style="gap: 1rem;">
+                    <!-- LINKS -->
+                   <div id="links" style="display: flex; gap: 1rem;">
+                        <a href="/posts/terminology">Plant Terminology</a>
+                          <a href="/about">About</a>
+    
+                    </div>
+
+                    <!-- SEARCH -->
+                    <button class="flex" role="button" data-a11y-dialog-show="search-dialog" id="search-button"
+                            type="button">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="100%" fill="none" viewBox="0 0 16 17"
+                             style="width: 1rem; height: 1rem;" aria-hidden="true">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-width="1.25"
+                                  d="m14.667 15.333-3.768-3.768m1.546-4.01a5.556 5.556 0 1 1-11.112 0 5.556 5.556 0 0 1 11.112 0z"></path>
+                        </svg>
+                        <span>Type to search</span>
+                        <span style="margin-left: 2rem;" class="meta-key-symbol">⌘K</span>
+                    </button>
+                </section>
+            </div>
+        </nav>
+
+        <input id="menu-toggle" type="checkbox"/>
+
+        <!-- MOBILE NAVBAR -->
+        <nav id="navbar-mobile">
+            <div class="nav-bar-content">
+                <!-- LEFT SECTION -->
+                <section id="logo">
+                    <div class="flex top-row">
+                        <a class="flex" href="/" style="align-items: center;">
+                            <!--                <svg class="plantbase-icon" xmlns="http://www.w3.org/2000/svg" width="27.65182" height="28.4169" viewBox="0 0 27.65182 28.4169" creator="Katerina Limpitsouni"><path d="M13.5504,19.26321c2.52209-4.57641,5.04418-9.15282,7.56627-13.72923,.63116-1.14525,.31724-2.779-.89688-3.42047-1.17314-.61982-2.74636-.32632-3.42047,.89688-2.52209,4.57641-5.04418,9.15282-7.56627,13.72923-.63116,1.14525-.31724,2.779,.89688,3.42047,1.17314,.61982,2.74636,.32632,3.42047-.89688h0Z" fill="#181c1f" origin="undraw"/><path d="M4.63518,17.46454c2.52209-4.57641,5.04418-9.15282,7.56627-13.72923,.63116-1.14525,.31724-2.779-.89688-3.42047-1.17314-.61982-2.74636-.32632-3.42047,.89688C5.36201,5.78813,2.83991,10.36454,.31782,14.94095c-.63116,1.14525-.31724,2.779,.89688,3.42047,1.17314,.61982,2.74636,.32632,3.42047-.89688h0Z" fill="#181c1f"/><path d="M19.76772,27.20518c2.52209-4.57641,5.04418-9.15282,7.56627-13.72923,.63116-1.14525,.31724-2.779-.89688-3.42047-1.17314-.61982-2.74636-.32632-3.42047,.89688-2.52209,4.57641-5.04418,9.15282-7.56627,13.72923-.63116,1.14525-.31724,2.779,.89688,3.42047,1.17314,.61982,2.74636,.32632,3.42047-.89688h0Z" fill="#181c1f"/></svg>-->
+                            <p style="font-size: 1.4rem;">Plantbase</p>
+                        </a>
+                    </div>
+                </section>
+
+                <!-- RIGHT SECTION -->
+                <section id="nav-end">
+                    <!-- MENU -->
+                    <label for="menu-toggle">
+                        <!-- UNCHECKED -->
+                        <svg class="icon-unchecked" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24"
+                             height="24"
+                             color="#000000" fill="none">
+                            <path d="M20 12L10 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                  stroke-linejoin="round"/>
+                            <path d="M20 5L4 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                  stroke-linejoin="round"/>
+                            <path d="M20 19L4 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                  stroke-linejoin="round"/>
+                        </svg>
+                        <!-- CHECKED -->
+                        <svg class="icon-checked" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24"
+                             height="24" color="#000000" fill="none">
+                            <path d="M19.0005 4.99988L5.00045 18.9999M5.00045 4.99988L19.0005 18.9999"
+                                  stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                  stroke-linejoin="round"/>
+                        </svg>
+                    </label>
+                    <button class="flex small" role="button" data-a11y-dialog-show="search-dialog" id="search-button"
+                            type="button" aria-label="search-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="100%" fill="none" viewBox="0 0 16 17"
+                             style="width: 1rem; height: 1rem;" aria-hidden="true">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-width="1.25"
+                                  d="m14.667 15.333-3.768-3.768m1.546-4.01a5.556 5.556 0 1 1-11.112 0 5.556 5.556 0 0 1 11.112 0z"></path>
+                        </svg>
+                    </button>
+                </section>
+            </div>
+        </nav>
+
+        <!-- MENU CONTENTS -->
+        <ul class="menu">
+
+
+            <a href="/posts/terminology">
+                <li class="card outline rounded">Plant Terminology</li>
+            </a>
+            <a href="/about">
+                <li class="card outline rounded">About</li>
+            </a>
+        </ul>
+    </div>
+</div>
+
+
+

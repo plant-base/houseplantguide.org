@@ -1,0 +1,81 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<meta name="description" content="{{ description }}">
+
+<!-- Tells Google not to provide a translation for this document -->
+<meta name="google" content="notranslate">
+
+<!-- Identify the software used to build the document -->
+<meta name="generator" content="eleventy">
+
+<!-- Open graph -->
+<meta property="og:title" content="{{ subtitle }}">
+<meta property="og:description" content="{{ description or title }}">
+<meta property="og:type" content="article">
+<meta property="og:image" content="{{ metadata.url + page.url + species_slug + '-200w.jpeg' }}">
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="675"/>
+
+<!-- Twitter -->
+<!-- TODO: FIX COVER IMAGE -->
+
+<title>{{title or metadata.title}}</title>
+
+<!-- CSS -->
+<link rel="preload" href="/web/assets/css/reset.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+
+<!-- LEAFLET -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+<script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+
+<noscript><link rel="stylesheet" href="/web/assets/css/reset.css"></noscript>
+
+<!-- PAGEFIND -->
+<link href="/pagefind/pagefind-ui.css" rel="stylesheet">
+<script src="/pagefind/pagefind-ui.js"></script>
+
+<script src="/web/assets/js/a11y-dialog.js"></script>
+
+{% set css %}
+    {% include "styles.njk" %}
+{% endset %}
+
+<style>{{ css | cssmin | safe }}</style>
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22><text y=%2224%22 font-size=%2224%22>{{icon}}</text></svg>">
+<link rel="preload" as="font" href="/web/assets/fonts/icons.woff2?fokozo" type="font/woff2" crossorigin="crossorigin"/>
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+<link rel="manifest" href="/favicon/site.webmanifest">
+<link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/favicon/favicon.ico">
+<meta name="msapplication-TileColor" content="#fcf9f6">
+<meta name="msapplication-config" content="/favicon/browserconfig.xml">
+<meta name="theme-color" content="#fcf9f6">
+<!-- INLINED GOOGLE FONTS -->
+
+
+<link rel="preconnect" as="font" href="https://fonts.gstatic.com">
+<style>
+  /* latin */
+  @font-face {
+    font-family: 'Vollkorn';
+    font-style: normal;
+    font-weight: 400 900;
+    font-display: swap;
+    src: url("https://fonts.gstatic.com/s/vollkorn/v23/0yb9GDoxxrvAnPhYGxkpaE0Urhg0.woff2") format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+</style>
+<!-- <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">-->
+
+<!-- SCRIPTS -->
+<script rel="preconnect" data-goatcounter="https://plantbase.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+<script src="/web/assets/js/share.js" defer></script>
+<script async src="https://tally.so/widgets/embed.js"></script>

@@ -1,0 +1,287 @@
+
+/* COLORS */
+body {
+    --bg-light: #fff;
+    --shadow: var(--black-a1);
+
+    display: flex;
+    justify-content: space-between;
+}
+
+:root {
+    --background: #f7f8f5;
+    --background-dark: #2e3323;
+    --foreground-dark: #eff2e8;
+    --foreground: #f8f9f7;
+    --text-primary: #424517;
+    --text: #2f2f29;
+    --border: #314837;
+
+    --bg: #f7f8f5;
+    --dark: #181c1f;
+    --text-inverse: #eaf2f7;
+    --theme: #fffbcd;
+    --marker-color: 255, 234, 71;
+    --search-box-bg: var(--black-a1);
+    --search-box-outline: var(--black-a6);
+}
+
+/*.dark, :root {*/
+/*    --background: #1C1816FF;*/
+
+/*    --dark: #eaf2f7;*/
+/*    --text: var(--white-a11);*/
+/*    --text-inverse: #181c1f;*/
+/*    --theme: #ffd848;*/
+/*    --marker-color: 102, 255, 174;*/
+/*    --search-box-bg: var(--white-a1);*/
+/*    --search-box-outline: var(--white-a6);*/
+/*}*/
+
+/* COLORS */
+.background {
+    background-color: var(--background);
+}
+
+.foreground {
+    background-color: var(--foreground);
+}
+
+/* UTILITY */
+
+.rounded {
+    border-radius: 4px;
+}
+
+.outline {
+    border: 1px solid var(--border);
+}
+
+.shadow {
+    box-shadow: 4px 4px 0 var(--shadow);
+}
+
+
+.expand {
+    flex: 1;
+}
+
+.flex {
+    display: flex;
+}
+
+.wrap {
+    flex-wrap: wrap;
+}
+
+.always-row {
+    flex-direction: row;
+}
+
+.column {
+    flex-direction: column;
+}
+
+.space-between {
+    justify-content: space-between;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.p-0 {
+    padding: 0;
+}
+
+/* GENERAL */
+#article {
+    flex-grow: 1;
+    max-width: 100%;
+    min-width: 0;
+    margin-bottom: 2em;
+}
+
+/* TYPOGRAPHY */
+h1 {
+    font-size: 2em;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    line-height: 1.0;
+    font-weight: bold;
+    color: var(--text-primary);
+}
+
+h1.page-content {
+    font-family: Vollkorn, serif;
+    font-size: 3em;
+}
+
+
+h2 {
+    scroll-margin-top: 2em;
+    font-size: 1.8rem;
+    padding-top: 3rem;
+    padding-bottom: 1rem;
+    font-weight: bold;
+    color: var(--text-primary);
+}
+
+h3 {
+    font-family: Vollkorn, serif;
+    scroll-margin-top: 4.8em;
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: var(--text-primary);
+}
+
+h4 {
+    scroll-margin-top: 4.8em;
+    font-size: 1.2rem;
+    padding-top: 2.4rem;
+    padding-bottom: 0rem;
+    font-weight: bold;
+    font-family: Vollkorn, serif;
+}
+
+
+p {
+    line-height: 1.8;
+    margin-bottom: 1em;
+    font-size: 0.9rem;
+    font-family: Inconsolata, monospace;
+}
+
+/* TAXONOMY */
+#taxonomy-card a {
+    text-decoration: none;
+}
+
+#taxonomy-list a {
+    text-decoration: none;
+    border: 0;
+}
+
+#familia-taxon {
+    margin-left: 0.15em;
+    margin-right: 0.15em;
+    color: var(--black);
+    padding: 0.15em 0.5em;
+    border-radius: 6px;
+    background-color: #c6eb8e;
+}
+
+#genus-taxon {
+    margin-left: 0.15em;
+    margin-right: 0.15em;
+    color: var(--black);
+    font-style: italic;
+    padding: 0.15em 0.5em;
+    border-radius: 6px;
+    background-color: #d8e3bf;
+}
+
+#species-taxon {
+    margin-left: 0.15em;
+    margin-right: 0.15em;
+    color: var(--black);
+    font-style: italic;
+    padding: 0.15em 0.5em;
+    border-radius: 6px;
+    background-color: #b4e9e2;
+}
+
+#subspecies-taxon {
+    color: var(--black);
+    font-style: italic;
+    padding: 0.15em 0.5em;
+    border-radius: 6px;
+    background-color: #ead997;
+}
+
+#cultivar-taxon {
+    color: var(--black);
+    padding: 0.15em 0.4em;
+    border-radius: 6px;
+    background-color: #e4e4e4;
+}
+
+#cultivar-taxon:before {
+    content: '\'';
+}
+
+#cultivar-taxon:after {
+    content: '\'';
+}
+
+/* FOOTER */
+#article #footer {
+    margin-top: 6em;
+    background: var(--bg-light);
+}
+
+#article #footer p {
+    margin: 0;
+}
+
+
+
+.gap {
+    gap: 1em;
+}
+.small-gap {
+    gap: 0.8em;
+}
+
+
+.low {
+    margin-left: 0.15em;
+    margin-right: 0.15em;
+    color: var(--black);
+    font-style: italic;
+    padding: 0.15em 0.4em;
+    border-radius: 6px;
+    background-color: #ffc8c8;
+}
+
+.medium {
+    margin-left: 0.15em;
+    margin-right: 0.15em;
+    color: var(--black);
+    font-style: italic;
+    padding: 0.15em 0.4em;
+    border-radius: 6px;
+    background-color: #fff9c7;
+}
+
+.high {
+    margin-left: 0.15em;
+    margin-right: 0.15em;
+    color: var(--black);
+    font-style: italic;
+    padding: 0.15em 0.4em;
+    border-radius: 6px;
+    background-color: #b4e9bc;
+}
+
+table, th, td {
+    border: 1px solid;
+}
+
+th {
+    font-weight: bold;
+}
+
+th, td {
+    padding: 0.5em;
+    padding-right: 3em;
+}
+
+#pies {
+    width: 22em;
+    height: 22em;
+}

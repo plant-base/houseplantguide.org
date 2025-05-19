@@ -1,0 +1,1057 @@
+---
+layout: base.njk
+index: true
+eleventyComputed:
+    icon: 🌱
+    title: "{{ name }} Houseplant Care Guide"
+    species_slug: "{{ name | slug }}"
+    genus_slug: "{{ genus | slug }}"
+    familia_slug: "{{ familia | slug }}"
+    permalink: /species/{{ species_slug }}/
+    description: "Learn how to care for the {{ name }} houseplant — find care tips about light, water, soil, temperature, toxicity & more."
+---
+
+{%- from "components/taxonomy.njk" import taxonomy -%}
+{%- from "components/ph.njk" import ph -%}
+{%- from "components/map.njk" import map -%}
+{%- from "components/noinfo.njk" import noinfo -%}
+
+<!-- PAGEFIND EXCERPT -->
+<span style="display: none" data-pagefind-meta="title">{{ name }}</span>
+{%- if common_names -%}
+<span style="display: none" data-pagefind-body>{{ name }} is also known as {{ common_names }}.</span>
+{%- else -%}
+<span style="display: none" data-pagefind-body>{{ name }}.</span>
+{%- endif -%}
+<span style="display: none" data-pagefind-filter="filter">Species</span>
+
+
+<!--    <div style="position: sticky; top: 0;">-->
+<!--        <div style="width: 100%; border: 1px solid black; display: block;">-->
+<!--            <h1>Nerve Plant</h1>-->
+<!--        </div>-->
+<!--    </div>-->
+
+
+<!--<div class="sticky species-header">-->
+<!--    <div class="unstuck">-->
+<!--        <div class="page">-->
+<!--            <h1 class="page-content">{{ name }}</h1>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="stuck">-->
+<!--        <div>-->
+<!--            <h1>{{ name }}</h1>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<div class="page">
+    <h1 class="page-content">{{ title }}</h1>
+</div>
+
+<!--<div class="sticky">-->
+<!--    <div class="unstuck">-->
+<!--        <div>-->
+<!--        INSTICK-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="stuck">-->
+<!--        <div>-->
+<!--        STUCK-->
+<!--        </div>-->
+<!--    </div>-->
+<!--&lt;!&ndash;    <h1 id="description-header" style="font-size: calc(3rem + 1vw);">{{ name }}</h1>&ndash;&gt;-->
+<!--</div>-->
+
+<div class="page">
+    <div class="page-content">
+        <main id="article">
+
+            <!-- GENERAL INFO -->
+            <div id="description-cards" class="flex row gap">
+              
+
+ {%- set has_image = species_slug | checkSpeciesImage %}
+                {%- if has_image -%}
+                    <div id="species-image" class="flex column small-gap">
+                    <div class="image-container flex rounded">
+                        {% gallery species_slug %}
+                    </div>
+                </div>
+
+                {%- endif -%}
+
+
+               
+
+                <div class="flex column expand small-gap">
+                    <!-- TAXONOMY CARD-->
+                    {{ taxonomy({ species: name, species_slug: species_slug, genus: genus, genus_slug: genus_slug,
+                    familia:
+                    familia, familia_slug: familia_slug, common_names: common_names, etymology: etymology }) }}
+
+                    <!--<div id="cultivars-card" class="rounded background outline shadow" style="padding: 0.5em;">
+                        <p>Cultivars</p>
+                        <div id="cultivars" style="display: flex">
+                            <ul>
+                                <li><p><span id="cultivar-taxon">Angel Snow</span></p></li>
+                                <li><p><span id="cultivar-taxon">Black Star</span></p></li>
+                            </ul>
+                        </div>
+                    </div>-->
+
+
+                    <div id="info-pills" class="flex wrap">
+                        <!-- FLOWERING -->
+                        {%- if flowering == true -%}
+                        <a href="#additional-information">
+                            <div
+                                style="display: flex; flex-direction: column; align-items: center; justify-content: center;"
+                                class="rounded outline foreground">
+                                <p style="margin: 0; font-size: 1.0em;">Flowering</p>
+                            </div>
+                        </a>
+                        {%- elseif flowering == false -%}
+                        <div
+                            style="display: flex; flex-direction: column; align-items: center; justify-content: center;"
+                            class="rounded outline background">
+                            <p style="margin: 0; font-size: 1.0em;">Non-flowering</p>
+                        </div>
+                        {%- endif -%}
+
+                        <!-- TOXICITY -->
+                        {%- if safe_for_pets == true -%}
+                        <a href="#additional-information">
+                            <div class="flex always-row align-center justify-center rounded outline background">
+                                <p style="margin: 0; font-size: 1.0em;">Safe for pets</p>
+                            </div>
+                        </a>
+                        {%- endif -%}
+
+                        <!-- VULNERABILITY STATUS -->
+                        {%- if iucn_status == "near_threatened" -%}
+                        <div id="iucn-status" class="tag rounded outline background"
+                             style="background-color: #ffdcd4; color: var(--tomato-11); border: 1px solid transparent;">
+                            <a href="#additional-information">
+                                <p style="margin: 0; font-size: 1.0em;">Near Threatened</p>
+                            </a>
+                            <div class="tooltip">
+                                <svg class="tooltip-icon" style="color: var(--tomato-11);" aria-hidden="true"
+                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                     viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                          stroke-width="2"
+                                          d="M10 11h2v5m-2 0h4m-2.592-8.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                                </svg>
+                                <span class="tooltiptext">Vulnerability status according to the IUCN Red List of Threatened Species.</span>
+                            </div>
+                        </div>
+                        {%- elseif iucn_status == "vulnerable" -%}
+                        <div id="iucn-status" class="tag rounded outline background"
+                             style="background-color: #ffdcd4; color: var(--tomato-11); border: 1px solid transparent;">
+                            <a href="#additional-information">
+                                <p style="margin: 0; font-size: 1.0em;">IUCN Vulnerable</p>
+                            </a>
+                            <div class="tooltip">
+                                <svg class="tooltip-icon" style="color: var(--tomato-11);" aria-hidden="true"
+                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                     viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                          stroke-width="2"
+                                          d="M10 11h2v5m-2 0h4m-2.592-8.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                                </svg>
+                                <span class="tooltiptext">Vulnerability status according to the IUCN Red List of Threatened Species.</span>
+                            </div>
+                        </div>
+                        {%- elseif iucn_status == "endangered" -%}
+                        <div id="iucn-status" class="tag rounded outline background"
+                             style="background-color: #ffdcd4; color: var(--tomato-11); border: 1px solid transparent;">
+                            <a href="#additional-information">
+                                <p style="margin: 0; font-size: 1.0em;">Endangered</p>
+                            </a>
+                            <div class="tooltip">
+                                <svg class="tooltip-icon" style="color: var(--tomato-11);" aria-hidden="true"
+                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                     viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                          stroke-width="2"
+                                          d="M10 11h2v5m-2 0h4m-2.592-8.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                                </svg>
+                                <span class="tooltiptext">Vulnerability status according to the IUCN Red List of Threatened Species.</span>
+                            </div>
+                        </div>
+                        {%- elseif iucn_status == "critically_endangered" -%}
+                        <div id="iucn-status" class="tag rounded outline background"
+                             style="background-color: #ffdcd4; color: var(--tomato-11); border: 1px solid transparent;">
+                            <a href="#additional-information">
+                                <p style="margin: 0; font-size: 1.0em;">Critically Endangered</p>
+                            </a>
+                            <div class="tooltip">
+                                <svg class="tooltip-icon" style="color: var(--tomato-11);" aria-hidden="true"
+                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                     viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                          stroke-width="2"
+                                          d="M10 11h2v5m-2 0h4m-2.592-8.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                                </svg>
+                                <span class="tooltiptext">Vulnerability status according to the IUCN Red List of Threatened Species.</span>
+                            </div>
+                        </div>
+                        {%- elseif iucn_status == "extinct_in_the_wild" -%}
+                        <div id="iucn-status" class="tag rounded outline background"
+                             style="background-color: #ffdcd4; color: var(--tomato-11); border: 1px solid transparent;">
+                            <a href="#additional-information">
+                                <p style="margin: 0; font-size: 1.0em;">Extinct In The Wild</p>
+                            </a>
+                            <div class="tooltip">
+                                <svg class="tooltip-icon" style="color: var(--tomato-11);" aria-hidden="true"
+                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                     viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                          stroke-width="2"
+                                          d="M10 11h2v5m-2 0h4m-2.592-8.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                                </svg>
+                                <span class="tooltiptext">Vulnerability status according to the IUCN Red List of Threatened Species.</span>
+                            </div>
+                        </div>
+                        {%- elseif iucn_status == "extinct" -%}
+                        <div id="iucn-status" class="tag rounded outline background"
+                             style="background-color: #c7c7c724; color: #9f9f9f; border: 1px solid transparent;">
+                            <a href="#additional-information">
+                                <p style="margin: 0; font-size: 1.0em;">Extinct</p>
+                            </a>
+                            <div class="tooltip">
+                                <svg class="tooltip-icon" style="color: #9f9f9f;" aria-hidden="true"
+                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                     viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                          stroke-width="2"
+                                          d="M10 11h2v5m-2 0h4m-2.592-8.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                                </svg>
+                                <span class="tooltiptext">Vulnerability status according to the IUCN Red List of Threatened Species.</span>
+                            </div>
+                        </div>
+                        {%- else -%}
+                        {%- endif -%}
+                    </div>
+                </div>
+
+
+            </div>
+
+            <!-- DISTRIBUTION -->
+            {%- if (native | length > 0) or (introduced | length > 0) -%}
+            <section id="distribution">
+                <h2 id="distribution-header" class="flex align-center">
+                    <a href="#distribution"><img class="header-icon" src="/web/assets/icons/globe.svg"
+                                                 alt="Globe icon"/></a>
+                    Distribution
+                </h2>
+
+                <div class="flex row">
+                    {%- if (native | length > 0) or (introduced | length > 0) -%}
+
+                    <div class="flex column" style="flex-basis: 40%">
+                        {%- if (native | zonecount < 2) -%}
+                        <p>{{ name }} is native to the {{ native }} region, thriving naturally in this area.</p>
+                        {%- else -%}
+                        <p>{{ name }} is native to regions including {{ native | formatRegions }}, thriving naturally in these
+                            areas.</p>
+                        {%- endif -%}
+
+                        {%- if introduced | length > 0 -%}
+                        <p>It has also been introduced to regions such as {{ introduced | formatRegions }}, adapting well to diverse
+                            environments globally.</p>
+                        {%- endif -%}
+                    </div>
+
+                    <!-- MAP -->
+                  {{ { native: native, introduced: introduced } | inlineGeoJSON(species_slug) | safe }}
+
+                    {{ map({ species_slug: species_slug }) }}
+
+
+
+
+                    {%- else -%}
+
+                    {{ noinfo({ text: "distribution data" }) }}
+
+                    {%- endif -%}
+                </div>
+            </section>
+            {%- endif -%}
+
+            <!-- CARE -->
+            <section id="care">
+                <h2 id="care-header" class="flex align-center">
+                    <a href="#care"><img class="header-icon" src="/web/assets/icons/care.svg"
+                                         alt="Care icon"/></a>
+                    Care
+                </h2>
+                <p>Learn how to care for {{ name }} when keeping it indoors.</p>
+                <p>Each topic has an
+                    in-depth guide that you may read to get more information.</p>
+
+                <div id="care-cards">
+
+                    <!-- LIGHT -->
+                    {%- if min_light and max_light -%}
+                    <div class="outline rounded care-card">
+                        <details>
+                            <summary class="flex space-between align-center">
+                                <h3 id="light" class="p-0">Light</h3>
+                                <img class="header-icon icon-plus" src="/web/assets/icons/plus.svg" alt="Plus icon"/>
+                                <img class="header-icon icon-minus" src="/web/assets/icons/minus.svg"
+                                     alt="Minus icon"/>
+                            </summary>
+
+                            <div>
+                                {%- if min_light or max_light -%}
+
+                                {{ noinfo({ text: "light information" }) }}
+
+                                {%- else -%}
+                                <p>Place your {{ name }} in an area matching the following characteristics.</p>
+                                <div class="enumeration">
+                                    <ul>
+                                        {%- if (min_light + max_light) * 0.5 < 1 -%}
+                                        <li class="background rounded outline"><p>low light</p></li>
+                                        <li class="background rounded outline"><p>shaded</p></li>
+                                        <li class="background rounded outline"><p>north-facing window</p></li>
+                                        {%- elseif (min_light + max_light) * 0.5 > 1 and (min_light + max_light) * 0.5 <
+                                        4 -%}
+                                        <li class="background rounded outline"><p>indirect sunlight</p></li>
+                                        <li class="background rounded outline"><p>east-facing window</p></li>
+                                        <li class="background rounded outline"><p>west-facing window</p></li>
+                                        {%- elseif (min_light + max_light) * 0.5 > 4 and (min_light + max_light) * 0.5 <
+                                        20 -%}
+                                        <li class="background rounded outline"><p>bright, indirect sunlight</p></li>
+                                        <li class="background rounded outline"><p>filtered sunlight</p></li>
+                                        <li class="background rounded outline"><p>east or west facing window</p></li>
+                                        {%- elseif (min_light + max_light) * 0.5 > 20 -%}
+                                        <li class="background rounded outline"><p>bright light</p></li>
+                                        <li class="background rounded outline"><p>direct sunlight</p></li>
+                                        <li class="background rounded outline"><p>south-facing window</p></li>
+                                        {%- endif -%}
+                                    </ul>
+                                </div>
+
+                                <p>{{ name }} prefers light intensities between {{ min_light * 1000 }} lux
+                                    and {{ max_light * 1000 }} lux. It may also survive in light intensities as low
+                                    as {{ min_light * 1000 * 0.5 }} lux.</p>
+
+
+<!--                                <div class="value-range">-->
+<!--                                    <div class="bar outline rounded">-->
+<!--                                        <div class="value-label-5">0.01 klx</div>-->
+<!--                                        <div class="value-label-5">0.1 klx</div>-->
+<!--                                        <div class="value-label-5">1 klx</div>-->
+<!--                                        <div class="value-label-5">10 klx</div>-->
+<!--                                        <div class="value-label-5">100 klx</div>-->
+
+<!--                                        &lt;!&ndash;                                <div class="thriving-light-child-bar"&ndash;&gt;-->
+<!--                                        &lt;!&ndash;                                     style="width: calc((log({{ max_light }}, 10) - log({{ min_light }}, 10)) / (log(100, 10) - log(0.01, 10)) * 100%);&ndash;&gt;-->
+<!--                                        &lt;!&ndash;                                 left: calc((log({{ min_light }}, 10) - log(0.01, 10)) / (log(100, 10) - log(0.01, 10)) * 100%);">&ndash;&gt;-->
+<!--                                        &lt;!&ndash;                                    <div class="value-range-label">{{ min_light }} klx - {{ max_light }} klx</div>&ndash;&gt;-->
+<!--                                        &lt;!&ndash;                                </div>&ndash;&gt;-->
+
+<!--                                        &lt;!&ndash;                                <div class="surviving-light-child-bar"&ndash;&gt;-->
+<!--                                        &lt;!&ndash;                                     style="width: calc((log({{ min_light }}, 10) - log({{ min_light * 0.5 }}, 10)) / (log(100, 10) - log(0.01, 10)) * 100%);&ndash;&gt;-->
+<!--                                        &lt;!&ndash;                                 left: calc((log({{ min_light * 0.5 }}, 10) - log(0.01, 10)) / (log(100, 10) - log(0.01, 10)) * 100%);">&ndash;&gt;-->
+<!--                                        &lt;!&ndash;                                    <div class="value-range-label">{{ min_light * 0.5 }} klx - {{ min_light }} klx</div>&ndash;&gt;-->
+<!--                                        &lt;!&ndash;                                </div>&ndash;&gt;-->
+
+
+<!--                                        <div class="light-child-bar"-->
+<!--                                             style="width: calc((log({{ max_light }}, 10) - log({{ min_light * 0.5 }}, 10)) / (log(100, 10) - log(0.01, 10)) * 100%);-->
+<!--                                 left: calc((log({{ min_light * 0.5 }}, 10) - log(0.01, 10)) / (log(100, 10) - log(0.01, 10)) * 100%);">-->
+
+<!--                                        </div>-->
+
+
+<!--                                    </div>-->
+
+<!--                                    <div class="indicator"-->
+<!--                                         style="width: calc((log({{ max_light }}, 10) - log({{ min_light * 0.5 }}, 10)) / (log(100, 10) - log(0.01, 10)) * 100%);-->
+<!--                                 left: calc((log({{ min_light * 0.5 }}, 10) - log(0.01, 10)) / (log(100, 10) - log(0.01, 10)) * 100%);">-->
+<!--                                        <p>{{ min_light * 0.5 }} klx - {{ max_light }} klx</p>-->
+<!--                                    </div>-->
+
+<!--                                    &lt;!&ndash;                    <div class="value-range" style="margin-top: 0.2em; margin-bottom: 0.2em;">&ndash;&gt;-->
+<!--                                    &lt;!&ndash;                        <div class="bar outline rounded background" style="height: 1.0em;">&ndash;&gt;-->
+<!--                                    &lt;!&ndash;                            <div class="low-light-child-bar"&ndash;&gt;-->
+<!--                                    &lt;!&ndash;                                 style="width: calc((log(1, 10) - log(0.01, 10)) / (log(100, 10) - log(0.01, 10)) * 100%);&ndash;&gt;-->
+<!--                                    &lt;!&ndash;                                 left: calc((log(0.01, 10) - log(0.01, 10)) / (log(100, 10) - log(0.01, 10)) * 100%);">&ndash;&gt;-->
+<!--                                    &lt;!&ndash;                                <div class="value-range-label">low</div>&ndash;&gt;-->
+<!--                                    &lt;!&ndash;                            </div>&ndash;&gt;-->
+<!--                                    &lt;!&ndash;                            <div class="medium-light-child-bar"&ndash;&gt;-->
+<!--                                    &lt;!&ndash;                                 style="width: calc((log(4, 10) - log(1, 10)) / (log(100, 10) - log(0.01, 10)) * 100%);&ndash;&gt;-->
+<!--                                    &lt;!&ndash;                                 left: calc((log(1, 10) - log(0.01, 10)) / (log(100, 10) - log(0.01, 10)) * 100%);">&ndash;&gt;-->
+<!--                                    &lt;!&ndash;                                <div class="value-range-label">medium</div>&ndash;&gt;-->
+<!--                                    &lt;!&ndash;                            </div>&ndash;&gt;-->
+<!--                                    &lt;!&ndash;                            <div class="high-light-child-bar"&ndash;&gt;-->
+<!--                                    &lt;!&ndash;                                 style="width: calc((log(10, 10) - log(4, 10)) / (log(100, 10) - log(0.01, 10)) * 100%);&ndash;&gt;-->
+<!--                                    &lt;!&ndash;                                 left: calc((log(4, 10) - log(0.01, 10)) / (log(100, 10) - log(0.01, 10)) * 100%);">&ndash;&gt;-->
+<!--                                    &lt;!&ndash;                                <div class="value-range-label">bright</div>&ndash;&gt;-->
+<!--                                    &lt;!&ndash;                            </div>&ndash;&gt;-->
+<!--                                    &lt;!&ndash;                            <div class="very-high-light-child-bar"&ndash;&gt;-->
+<!--                                    &lt;!&ndash;                                 style="width: calc((log(100, 10) - log(10, 10)) / (log(100, 10) - log(0.01, 10)) * 100%);&ndash;&gt;-->
+<!--                                    &lt;!&ndash;                                 left: calc((log(10, 10) - log(0.01, 10)) / (log(100, 10) - log(0.01, 10)) * 100%);">&ndash;&gt;-->
+<!--                                    &lt;!&ndash;                                <div class="value-range-label">very bright</div>&ndash;&gt;-->
+<!--                                    &lt;!&ndash;                            </div>&ndash;&gt;-->
+<!--                                    &lt;!&ndash;                        </div>&ndash;&gt;-->
+<!--                                    &lt;!&ndash;                    </div>&ndash;&gt;-->
+<!--                                    <div style="margin: 0; padding: 0; display: flex; align-items: start;">-->
+<!--                                        <p style="margin: 0; padding: 0; font-size: 0.7em; color: #7b7b7b;">1 klx = 1000-->
+<!--                                            lux =-->
+<!--                                            92.903-->
+<!--                                            foot-candles</p>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+
+                                <!--                <details>-->
+                                <!--                    <summary>-->
+                                <!--                        <p>More details</p>-->
+                                <!--                    </summary>-->
+
+                                <!--                   -->
+
+                                <!--                </details>-->
+
+                                {%- endif -%}
+                            </div>
+                            {# <div>
+                                <p class="more-info"><a href="../../posts/light" target="_blank">More information</a>
+                                </p>
+                            </div> #}
+                        </details>
+                    </div>
+                    {%- endif -%}
+
+                    <!-- WATERING -->
+                    <div class="outline rounded care-card">
+                        <details>
+
+                            <summary class="flex space-between align-center">
+                                <h3 id="watering" class="p-0">Watering</h3>
+                                <img class="header-icon icon-plus" src="/web/assets/icons/plus.svg" alt="Plus icon"/>
+                                <img class="header-icon icon-minus" src="/web/assets/icons/minus.svg"
+                                     alt="Minus icon"/>
+                            </summary>
+                            <div class="flex row" style="column-gap: 3em;">
+
+                                <p>Water your {{species }} only when the top layer of the soil feels dry. If it is still
+                                    moist,
+                                    no
+                                    further watering is needed.</p>
+                                <p>Use a well-draining pot and make sure that the roots of the plant do not stand in
+                                    water for
+                                    extended
+                                    periods of time to avoid root
+                                    rot.</p>
+                            </div>
+                            {# <div>
+                                <p class="more-info"><a href="../../posts/watering" target="_blank">More information</a>
+                                </p>
+                            </div> #}
+                        </details>
+                    </div>
+
+                    <!-- TEMPERATURE -->
+                    {%- if (min_temperature and max_temperature) or (min_humidity and max_humidity) -%}
+                    <div class="flex row" style="column-gap: 1em; row-gap: 1em;">
+                    {%- if min_temperature and max_temperature -%}
+                    <div class="outline rounded care-card">
+                        <h3 id="temperature" class="p-0">Temperature</h3>
+                        <div>
+
+                            {%- if min_temperature or max_temperature -%}
+
+                            {{ noinfo({ text: "temperature information" }) }}
+
+                            {%- else -%}
+                            <p>{{ name }} prefers temperatures between {{ min_temperature }}°C and {{
+                                max_temperature
+                                }}°C.</p>
+                            <div class="value-range">
+                                <div class="bar outline rounded">
+                                    <div class="value-label-6"><p>0°C</p></div>
+                                    <div class="value-label-6"><p>6°C</p></div>
+                                    <div class="value-label-6"><p>12°C</p></div>
+                                    <div class="value-label-6"><p>18°C</p></div>
+                                    <div class="value-label-6"><p>24°C</p></div>
+                                    <div class="value-label-6"><p>30°C</p></div>
+
+                                    <div class="temperature-child-bar"
+                                         style="width: calc(({{ max_temperature }} - {{ min_temperature }}) / 30 * 100%); left: calc({{ min_temperature }} / 30 * 100%);">
+                                    </div>
+                                </div>
+                                <div class="indicator"
+                                     style="width: calc(({{ max_temperature }} - {{ min_temperature }}) / 30 * 100%); left: calc({{ min_temperature }} / 30 * 100%);">
+                                    <p>{{ min_temperature }}°C - {{ max_temperature }}°C</p>
+                                </div>
+                                <div style="margin-top: 0; padding: 0; display: flex; align-items: start;">
+                                    <p style="margin: 0; padding: 0; font-size: 0.7em; color: #7b7b7b;">1°C =
+                                        33.8°F</p>
+                                </div>
+                            </div>
+
+                            <p>Avoid cold drafts and sudden temperature changes.</p>
+
+                            {%- endif -%}
+                        </div>
+                        {# <div>
+                            <p class="more-info"><a href="../../posts/temperature" target="_blank">More
+                                information</a></p>
+                        </div> #}
+
+                    </div>
+                    {%- endif -%}
+
+                    <!-- HUMIDITY -->
+                    {%- if min_humidity and max_humidity -%}
+                        <div class="outline rounded care-card">
+                            <h3 id="humidity" class="p-0">Humidity</h3>
+
+                            <div>
+                                {%- if 0.5 * (min_humidity + max_humidity) < 30 -%}
+                                <p>{{ name }} prefers a <span class="emphasize">low relative humidity</span>, ranging
+                                    between
+                                    {{ min_humidity }}%
+                                    and {{ max_humidity }}%.</p>
+                                {%- elseif 0.5 * (min_humidity + max_humidity) >= 30 and 0.5 * (min_humidity +
+                                max_humidity) <
+                                50 -%}
+                                <p>{{ name }} prefers a <span class="emphasize">medium relative humidity</span>,
+                                    ranging
+                                    between {{ min_humidity }}%
+                                    and {{ max_humidity }}%.</p>
+                                {%- elseif 0.5 * (min_humidity + max_humidity) >= 50 and 0.5 * (min_humidity +
+                                max_humidity) <
+                                100 -%}
+                                <p>{{ name }} prefers a <span class="emphasize">high relative humidity</span>,
+                                    ranging
+                                    between {{ min_humidity }}%
+                                    and {{ max_humidity }}%.</p>
+                                {%- endif -%}
+                                <div class="value-range">
+                                    <div class="bar outline rounded">
+                                        <div class="value-label-6">0%</div>
+                                        <div class="value-label-6">20%</div>
+                                        <div class="value-label-6">40%</div>
+                                        <div class="value-label-6">60%</div>
+                                        <div class="value-label-6">80%</div>
+                                        <div class="value-label-6">100%</div>
+                                        <div class="humidity-child-bar"
+                                             style="width: calc(({{ max_humidity }} - {{ min_humidity }}) / 100 * 100%); left: calc({{ min_humidity }} / 100 * 100%);">
+                                        </div>
+                                    </div>
+                                    <div class="indicator"
+                                         style="width: calc(({{ max_humidity }} - {{ min_humidity }}) / 100 * 100%); left: calc({{ min_humidity }} / 100 * 100%);">
+                                        <p>{{ min_humidity }}% - {{ max_humidity }}%</p>
+                                    </div>
+                                </div>
+
+
+                                <p>Watering or misting your plants will increase the relative humidity around them.</p>
+                            </div>
+
+                            {# <div>
+                                <p class="more-info"><a href="../../posts/humidity" target="_blank">More information</a>
+                                </p>
+                            </div> #}
+
+                        </div>
+                    {%- endif -%}
+                    </div>
+                    {%- endif -%}
+
+                    {%- if (soil | length > 0) or ( min_ph and max_ph) -%}
+                    <!-- SOIL -->
+                    <div class="outline rounded care-card">
+                        <details>
+                            <summary class="flex space-between align-center">
+                                <h3 id="soil" class="p-0">Soil</h3>
+                                <img class="header-icon icon-plus" src="/web/assets/icons/plus.svg" alt="Plus icon"/>
+                                <img class="header-icon icon-minus" src="/web/assets/icons/minus.svg"
+                                     alt="Minus icon"/>
+                            </summary>
+                            <div>
+                                {%- if (soil | length > 0) -%}
+                                <p>{{ name }} prefers soil with the following characteristics.</p>
+                                <div class="enumeration">
+                                    <ul>
+                                        {%- for type in soil -%}
+                                        <li class="background rounded outline"><p>{{ type }}</p></li>
+                                        {%- endfor -%}
+                                    </ul>
+                                </div>
+                                {%- else -%}
+
+                                <!--                        {{ noinfo({ text: "soil composition information" }) }}-->
+
+                                {%- endif -%}
+
+                                <!-- PH -->
+                                {%- if min_ph or max_ph -%}
+
+                                <!--                        {{ noinfo({ text: "pH information" }) }}-->
+
+                                {%- else -%}
+
+                                {{ ph({ min_ph: min_ph, max_ph: max_ph, ph_conditions: ph_conditions }) }}
+
+                                {%- endif -%}
+
+
+                            </div>
+
+                            {# <div>
+                                <p class="more-info"><a href="../../posts/soil" target="_blank">More information</a></p>
+                            </div> #}
+                        </details>
+                    </div>
+                    {%- endif -%}
+
+                    <!-- PROPAGATION -->
+                      {%- if propagation -%}
+                    <div class="outline rounded care-card">
+                        <details>
+                            <summary class="flex space-between align-center">
+                                <h3 id="propagation" class="p-0">Propagation</h3>
+                                <img class="header-icon icon-plus" src="/web/assets/icons/plus.svg" alt="Plus icon"/>
+                                <img class="header-icon icon-minus" src="/web/assets/icons/minus.svg"
+                                     alt="Minus icon"/>
+                            </summary>
+                            <div>
+                                {%- if propagation -%}
+                                <p>You can propagate this plant asexually using one of these techniques.</p>
+                                <div class="enumeration">
+                                    <ul>
+                                        {%- for technique in propagation -%}
+                                        <li class="background rounded" style="display: flex; flex-direction: column; align-items: center;">
+                                            {%- if technique == "leaf cutting" -%}
+                                            <img style="height: 4rem;" src="/web/assets/icons/leaf_cutting.svg" alt="Leaf cutting icon."/>
+                                            {%- elseif technique == "stem cutting" -%}
+                                            <img style="height: 4rem;" src="/web/assets/icons/stem_cutting.svg" alt="Stem cutting icon."/>
+                                             {%- elseif technique == "rhizome division" -%}
+                                            <img style="height: 4rem;" src="/web/assets/icons/rhizome_divsion.svg" alt="Rhizome division icon."/>
+                                            {%- elseif technique == "layering" -%}
+                                            <img style="height: 4rem;" src="/web/assets/icons/layering.svg" alt="Layering icon."/>
+                                            {%- endif -%}
+                                            <p>{{ technique }}</p>
+                                        </li>
+                                        {%- endfor -%}
+                                    </ul>
+                                </div>
+                                {%- else -%}
+
+                                {{ noinfo({ text: "propagation information" }) }}
+
+                                {%- endif -%}
+                            </div>
+                            {# <div>
+                                <p class="more-info"><a href="../../posts/propagation" target="_blank">More
+                                    information</a></p>
+                            </div> #}
+                        </details>
+                    </div>
+ {%- endif -%}
+                    <!-- NUTRITION -->
+                    <!--        <div class="outline rounded care-card">-->
+                    <!--            <h3 id="nutrition">Nutrition</h3>-->
+                    <!--            <p>Read <a href="../../posts/how-to-propagate-your-plants" target="_blank">this article on nutrition</a> for-->
+                    <!--                more information.</p>-->
+                    <!--        </div>-->
+
+                    <!-- PRUNING AND CLEANING -->
+                    <!--        <div class="outline rounded care-card">-->
+                    <!--            <h3 id="pruning-and-cleaning">Pruning and cleaning</h3>-->
+                    <!--            <p>Read <a href="../../posts/how-to-propagate-your-plants" target="_blank">this article on pruning and-->
+                    <!--                cleaning</a> for more information.</p>-->
+                    <!--        </div>-->
+
+                    <!-- PESTS -->
+                    <!--        <div class="outline rounded care-card">-->
+                    <!--            <h3 id="pests">Pests</h3>-->
+                    <!--            <p>Read <a href="../../posts/how-to-propagate-your-plants" target="_blank">this article on pests</a> for-->
+                    <!--                more information.</p>-->
+                    <!--        </div>-->
+
+                    <!-- REPOTTING -->
+                    <!--        <div class="outline rounded care-card">-->
+                    <!--            <h3 id="repotting">Repotting</h3>-->
+                    <!--            <p>Read <a href="../../posts/how-to-propagate-your-plants" target="_blank">this article on repotting</a> for-->
+                    <!--                more information.</p>-->
+                    <!--        </div>-->
+
+                    <!-- TOXICITY -->
+                    <!--        <div class="outline rounded care-card">-->
+                    <!--            <h3 id="toxicity">Toxicity</h3>-->
+                    <!--            <p>Read <a href="../../posts/how-to-propagate-your-plants" target="_blank">this article on toxicity</a> for-->
+                    <!--                more information.</p>-->
+                    <!--        </div>-->
+                </div>
+            </section>
+
+            <!-- ADDITIONAL INFORMATION -->
+            {%- if (attributes | length > 0) or (toxicity | length > 0) or (flowering) or iucn_status ==
+            "near_threatened" or
+            iucn_status == "vulnerable" or iucn_status == "endangered" or iucn_status == "critically_endangered" or
+            iucn_status
+            == "extinct_in_the_wild" or iucn_status == "extinct" -%}
+            <section id="additional-information">
+                <h2 id="additional-information-header" class="grid align-center">
+                    <a href="#additional-information"><img class="header-icon" src="/web/assets/icons/info.svg"
+                                                           alt="Info icon"/></a>
+                    Additional Info
+                </h2>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+    grid-gap: 1em;">
+
+                {%- if (flowering ) -%}
+                <div>
+                    <div id="flowering" class="outline rounded care-card" style="justify-content: flex-start; height: 100%; display: flex;">
+                        <h3>Flowers</h3>
+                        <p>Under the right conditions, {{ name }} is able to produce flowers.</p>
+                        {# <div>
+                            <p class="more-info"><a href="../../posts/flowers" target="_blank">More information</a></p>
+                        </div> #}
+                    </div>
+                </div>
+                {%- endif -%}
+
+                <div>
+                    <div id="toxicity" class="outline rounded care-card" style="justify-content: flex-start; height: 100%; display: flex;">
+                        <h3>Toxicity</h3>
+                        {%- if safe_for_pets == true -%}
+                        <p>{{ name }} is known to be safe for pets.</p>
+                        {%- elseif safe_for_pets == false -%}
+                        <p>{{ name }} is known to be <b>toxic to pets and/or humans</b>. Do not ingest the plant or
+                            parts of
+                            it.</p>
+                        {%- else -%}
+                        {{ noinfo({ text: "toxicity information" }) }}
+                        {%- endif -%}
+                        {# <div>
+                            <p class="more-info"><a href="../../posts/toxicity" target="_blank">More information</a></p>
+                        </div> #}
+                    </div>
+                </div>
+
+                </div>
+
+                {%- if iucn_status == "near_threatened" or iucn_status == "vulnerable" or iucn_status == "endangered" or
+                iucn_status == "critically_endangered" or iucn_status == "extinct_in_the_wild" or iucn_status ==
+                "extinct" -%}
+                <div style="margin-top: 1em;">
+                    <div id="vulnerability-status" class="outline rounded care-card">
+                        <h3>Vulnerability</h3>
+                        {%- if iucn_status == "near_threatened" -%}
+                        <p>According to the <i>IUCN Red List of Threatened Species</i>, {{ name }} is <b><i>near
+                            threatened</i></b>.</p>
+                        {%- elseif iucn_status == "vulnerable" -%}
+                        <p>According to the <i>IUCN Red List of Threatened Species</i>, {{ name }} is
+                            <b><i>vulnerable</i></b>.</p>
+                        {%- elseif iucn_status == "endangered" -%}
+                        <p>According to the <i>IUCN Red List of Threatened Species</i>, {{ name }} is
+                            <b><i>endangered</i></b>.</p>
+                        {%- elseif iucn_status == "critically_endangered" -%}
+                        <p>According to the <i>IUCN Red List of Threatened Species</i>, {{ name }} is <b><i>critically
+                            endangered</i></b>.</p>
+                        {%- elseif iucn_status == "extinct_in_the_wild" -%}
+                        <p>According to the <i>IUCN Red List of Threatened Species</i>, {{ name }} is <b><i>extinct
+                            in the
+                            wild</i></b>.</p>
+                        {%- elseif iucn_status == "extinct" -%}
+                        <p>According to the <i>IUCN Red List of Threatened Species</i>, {{ name }} is
+                            <b><i>extinct</i></b>.
+                        </p>
+                        {%- endif -%}
+                        <div>
+                            <p class="more-info"><a href="https://www.iucnredlist.org/" target="_blank">More
+                                information</a></p>
+                        </div>
+                    </div>
+                </div>
+                {%- endif -%}
+
+                {%- if (attributes | length > 0) -%}
+                {%- for attribute in attributes -%}
+                <div style="margin-top: 1em;">
+                    <div class="outline rounded info-card">
+                        <h3 id="{{ attribute.title }}">{{ attribute.title }}</h3>
+                        <p>{{ attribute.content| linkify | safe }}</p>
+                    </div>
+                </div>
+                {%- endfor -%}
+                {%- endif -%}
+            </section>
+            {%- endif -%}
+
+            <!-- RELATED SPECIES -->
+     {%- if (collections[genus_slug] | length > 1) -%}
+            <section id="related-species">
+                <h2 id="related-species-header" class="flex align-center">
+                    <a href="#related-species"><img class="header-icon" src="/web/assets/icons/more.svg"
+                                                    alt="More icon"/></a>
+                    Related species
+                </h2>
+
+                <div id="species-grid">
+                     {%- for species in collections[genus_slug]
+                        | excludeCurrent(page.url)
+                        | sort(false, false, "data.name")
+                        | limit(6) -%}
+                    <div style="display: flex; flex-direction: row;">
+                        <a href="{{ species.url }}" style="display: flex">
+                        {% speciesThumbnail species.data.species_slug, "ALT", "(min-width: 3em) 50vw, 50vw" %}
+                        <div style="display: flex; flex-direction: column; margin-left: 1em;">
+                            <p style="font-weight: bold; margin-bottom: 0.2em;">{{ species.data.name }}</p>
+                            {%- if species.data.common_names -%}
+                            <p>Known as {{ species.data.common_names }}</p>
+                            {%- endif -%}
+                        </div>
+                        </a>
+                    </div>
+                    {%- endfor -%}
+
+                    {# {%- for species in collections[genus_slug] | sort(false, false, "data.name") | limit(4) -%}
+                    <div style="display: flex; flex-direction: row;">
+                        <a href="{{  species.url }}" style="display: flex">
+                            {% speciesThumbnail species.data.species_slug, "ALT", "(min-width: 3em) 50vw, 50vw" %}
+                            <div style="display: flex; flex-direction: column; margin-left: 1em;">
+                                <p style="font-weight: bold; margin-bottom: 0.2em;">{{ species.data.name }}</p>
+                                {%- if species.data.common_names -%}
+                                <p>Known as {{ species.data.common_names }}</p>
+                                {%- endif -%}
+                            </div>
+                        </a>
+                    </div>
+                    {%- endfor -%} #}
+                </div>
+            </section>
+             {%- endif -%}
+
+
+            <!-- SOURCES -->
+            <div id="sources">
+                <h2 id="sources-header" class="flex align-center">
+                    <a href="#sources"><img class="header-icon" src="/web/assets/icons/book.svg" alt="Book icon"/></a>
+                    Sources
+                </h2>
+                <h4>Wikipedia | The Free Encyclopedia</h4>
+                <p style="word-wrap: break-word;"><a href="https://en.wikipedia.org/wiki/{{ name }}" target="_blank"
+                                                     rel="noopener noreferrer">https://en.wikipedia.org/wiki/{{ name }}</a>
+                </p>
+                <h4>Kew | Plants of the World Online</h4>
+                <p style="word-wrap: break-word;"><a href="https://powo.science.kew.org/results?q={{ name }}"
+                                                     target="_blank"
+                                                     rel="noopener noreferrer">https://powo.science.kew.org/results?q={{ name }}</a>
+                </p>
+                <h4>GBIF | Global Biodiversity Information Facility</h4>
+                <p style="word-wrap: break-word;"><a href="https://www.gbif.org/search?q={{ name }}" target="_blank"
+                                                     rel="noopener noreferrer">https://www.gbif.org/search?q={{ name }}</a>
+                </p>
+                {%- if (sources | length > 0) -%}
+                <h4>Other Sources</h4>
+                {%- for source in sources -%}
+                <p style="word-wrap: break-word;"><a href="{{ source }}" target="_blank" rel="noopener noreferrer">{{
+                    source
+                    }}</a></p>
+                {%- endfor -%}
+                {% endif %}
+            </div>
+
+            <!-- SHARE BUTTON -->
+        {# <button id="share-button">Share this plant</button> #}
+
+        </main>
+
+        <div id="table-of-contents">
+<!--            <section id="share">-->
+<!--                <h5>Share this page</h5>-->
+<!--                <ul id="share-buttons">-->
+<!--                    <li style="position: relative;">-->
+<!--                        <a href="">-->
+<!--                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#000000" fill="none">-->
+<!--                                <path d="M10 13.229C10.1416 13.4609 10.3097 13.6804 10.5042 13.8828C11.7117 15.1395 13.5522 15.336 14.9576 14.4722C15.218 14.3121 15.4634 14.1157 15.6872 13.8828L18.9266 10.5114C20.3578 9.02184 20.3578 6.60676 18.9266 5.11718C17.4953 3.6276 15.1748 3.62761 13.7435 5.11718L13.03 5.85978" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />-->
+<!--                                <path d="M10.9703 18.14L10.2565 18.8828C8.82526 20.3724 6.50471 20.3724 5.07345 18.8828C3.64218 17.3932 3.64218 14.9782 5.07345 13.4886L8.31287 10.1172C9.74413 8.62761 12.0647 8.6276 13.4959 10.1172C13.6904 10.3195 13.8584 10.539 14 10.7708" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />-->
+<!--                            </svg>-->
+<!--                        </a>-->
+<!--                        <span class="button-tooltip button-tooltip-top">Copied!</span>-->
+
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        <a href="https://twitter.com/intent/tweet?url={{metadata.url + page.url}}" data-track-share="Twitter" target="_blank" class="share share-popup share-tw rm-stats-tracked" rel="noopener noreferrer" aria-label="Share on Twitter"><i aria-hidden="true" class="icons-share tw fa fa-twitter"></i>-->
+<!--                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="44" height="44" viewBox="0 0 24 24" stroke-width="2" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">-->
+<!--                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>-->
+<!--                                <path d="M9 15l6 -6" />-->
+<!--                                <path d="M11 6l.463 -.536a5 5 0 0 1 7.071 7.072l-.534 .464" />-->
+<!--                                <path d="M13 18l-.397 .534a5.068 5.068 0 0 1 -7.127 0a4.972 4.972 0 0 1 0 -7.071l.524 -.463" />-->
+<!--                            </svg>-->
+<!--                        </a>-->
+
+
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        <a href=""><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="44" height="44" viewBox="0 0 24 24" stroke-width="2" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">-->
+<!--                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>-->
+<!--                            <path d="M9 15l6 -6" />-->
+<!--                            <path d="M11 6l.463 -.536a5 5 0 0 1 7.071 7.072l-.534 .464" />-->
+<!--                            <path d="M13 18l-.397 .534a5.068 5.068 0 0 1 -7.127 0a4.972 4.972 0 0 1 0 -7.071l.524 -.463" />-->
+<!--                        </svg></a>-->
+<!--                    </li>-->
+<!--                </ul>-->
+<!--            </section>-->
+
+            <nav>
+                <ul>
+                    <li><a href="#description-header">{{ name }}</a></li>
+                    {%- if (native | length > 0) or (introduced | length > 0) -%}
+                    <li><a href="#distribution">Distribution</a></li>
+                    {%- endif -%}
+                    <li><a href="#care">Care</a></li>
+                    <!--        <li class="padded"><a href="#soil">Soil</a></li>-->
+                    <!--        <li class="padded"><a href="#light">Light</a></li>-->
+                    <!--        <li class="padded"><a href="#watering">Watering</a></li>-->
+                    <!--        <li class="padded"><a href="#temperature">Temperature</a></li>-->
+                    <!--        <li class="padded"><a href="#humidity">Relative humidity</a></li>-->
+                    <!--        <li class="padded"><a href="#propagation">Propagation</a></li>-->
+                    <!--        <li class="padded"><a href="#nutrition">Nutrition</a></li>-->
+                    <!--        <li class="padded"><a href="#pruning-and-cleaning">Pruning and cleaning</a></li>-->
+                    <!--        <li class="padded"><a href="#pests">Pests</a></li>-->
+                    <!--        <li class="padded"><a href="#repotting">Repotting</a></li>-->
+                    <!--        <li class="padded"><a href="#toxicity">Toxicity</a></li>-->
+                    <li><a href="#additional-information">Additional Info</a></li>
+                    <!--        {%- for attribute in attributes -%}-->
+                    <!--        <li class="padded"><a href="#{{ attribute.title }}">{{ attribute.title }}</a></li>-->
+                    <!--        {%- endfor -%}-->
+                    {%- if (flowering) -%}
+                    <li class="padded"><a href="#additional-information">Flowers</a></li>
+                    {%- endif -%}
+                    <li class="padded"><a href="#additional-information">Toxicity</a></li>
+                    {%- if iucn_status == "near_threatened" or iucn_status == "vulnerable" or iucn_status ==
+                    "endangered" or
+                    iucn_status == "critically_endangered" or iucn_status == "extinct_in_the_wild" or iucn_status ==
+                    "extinct" -%}
+                    <li class="padded"><a href="#additional-information">Vulnerability status</a></li>
+                    {%- endif -%}
+                      {%- if (collections[genus_slug] | length > 1) -%}
+                    <li><a href="#related-species">Related species</a></li>
+                     {%- endif -%}
+                    <li><a href="#sources">Sources</a></li>
+                    
+                </ul>
+                
+
+            </nav>
+            <button id="share-button" class="small">Share this plant</button>
+
+        </div>
+
+
+    </div>
+</div>
+
+<script>
+    let slideIndex = 1;
+    showSlides(slideIndex);
+
+    // Next/previous controls
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+
+    // Thumbnail image controls
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+        let i;
+        let slides = document.getElementsByClassName("slide");
+        if (n > slides.length) {slideIndex = 1}
+        if (n < 1) {slideIndex = slides.length}
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        slides[slideIndex-1].style.display = "flex";
+    }
+</script>
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "{{ name }} Care Guide",
+  "url": "https://houseplantguide.org/species/{{ species_slug }}/",
+  "description": "Learn how to take care of {{ name }} — light, water, soil, temperature, toxicity, and more.",
+  "mainEntity": {
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What genus does {{ name }} belong to?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "{{ name }} belongs to the {{ genus }} genus."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What family does {{ name }} belong to?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "{{ name }} belongs to the {{ familia }} family."
+        }
+      }
+      {% if common_names %},
+      {
+        "@type": "Question",
+        "name": "What is {{ name }} commonly called?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "{{ name }} is commonly called {{ common_names }}."
+        }
+      }
+      {% endif %}
+      {% if native %},
+      {
+        "@type": "Question",
+        "name": "Where does {{ name }} natively grow?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "{{ name }} grows natively in {{ native }}."
+        }
+      }
+      {% endif %}
+      {% if etymology %},
+      {
+        "@type": "Question",
+        "name": "Where does the name of {{ name }} come from?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "{{ etymology }}"
+        }
+      }
+      {% endif %}
+      {% if safe_for_pets %},
+      {
+        "@type": "Question",
+        "name": "Is {{ name }} safe for pets?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "{{ name }} is safe for pets."
+        }
+      }
+      {% endif %}
+    ]
+  }
+}
+</script>

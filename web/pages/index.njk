@@ -1,0 +1,64 @@
+---
+title: "Plantbase | Houseplant Care Guides"
+description: Plantbase is a free, open-access platform for reliable houseplant care information — no ads, no products, just facts.
+icon: 🌱
+permalink: '/'
+layout: base.njk
+---
+
+<div class="page">
+    <div class="page-content">
+        <main id="article" style="margin-right: 0;">
+            <div style="margin-bottom: 2rem;">
+                <div>
+                    <h1 style="text-align: center; font-size: 2.4em; font-weight: 700; color: var(--text-primary);">Plant care, simplified</h1>
+                    <p style="text-align: center; display: block; margin: 1.3rem 0 1.1rem; font-size: 1rem; line-height: var(--line-height-4); font-weight: 400; letter-spacing: 0.3px;">
+                        Learn to take care of your favorite plants.</p>
+                    <div style="display: flex; width: 100%; justify-content: center; margin-bottom: 2em;">
+                        <button class="flex" role="button" data-a11y-dialog-show="search-dialog" id="search-button"
+                                type="button">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="100%" fill="none" viewBox="0 0 16 17"
+                                 style="color: black; width: 1rem; height: 1rem;" aria-hidden="true">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-width="1.25"
+                                      d="m14.667 15.333-3.768-3.768m1.546-4.01a5.556 5.556 0 1 1-11.112 0 5.556 5.556 0 0 1 11.112 0z"></path>
+                            </svg>
+                            <span style="color: black;">Find your plant</span>
+                            <span style="color: black; margin-left: 2rem;" class="meta-key-symbol">⌘K</span>
+                        </button>
+                    </div>
+
+                <p>Plantbase is a plant information platform that aims to <strong>collect, organize and publish</strong> accurate information on how to properly take care of your houseplants.</p>
+                <p>Our growing database contains detailed information sheets, pictures and care instructions for {{ collections.species.length }} popular houseplant species across {{ collections.genera.length }} genera.</p>
+<p>Below, you can find all plant species grouped by their genus.</p>
+                    {%- for c in collections.genera | sort(false, false, "data.name") -%}
+
+                    {%- if collections[c.data.genus_slug] | length > 0 -%}
+                        <h4>{{c.data.name}}</h4>
+
+                        <div class="species-cards">
+                            {% for plant in collections[c.data.genus_slug] | sort(false, false, "data.title") %}
+                                <a aria-label="{{ plant.data.title }}" href="{{ plant.url }}">
+                                    <div class="species-card background outline rounded shadow">
+                                        <div class="species-card-image">
+                                            {% speciesImage plant.data.species_slug, plant.data.title, "(min-width: 1000px) 209px,
+                            (min-width:
+                            580px) 149px,
+                            (min-width: 460px) 119px, (min-width: 380px) 101px" %}
+                                        </div>
+                                    </div>
+                                    <div class="species-card-wrapper">
+                                        <div class="species-card-text foreground">
+                                            <p>{{ plant.data.name }}</p>
+                                        </div>
+                                    </div>
+
+                                </a>
+                            {%- endfor -%}
+                        </div>
+                        {%- endif -%}
+                    {%- endfor -%}
+                </div>
+            </div>
+        </main>
+    </div>
+</div>

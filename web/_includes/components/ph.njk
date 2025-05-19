@@ -1,0 +1,51 @@
+{% macro ph(params) %}
+{% if params.ph_conditions | length == 1 %}
+<p>Use a <span class="emphasize">{{ params.ph_conditions[0] }}</span> soil with a pH ranging between {{ params.min_ph }} and
+    {{ params.max_ph }}.
+    {% else %}
+<p>Use a <span class="emphasize">{{ params.ph_conditions[0] }}</span> to <span class="emphasize">{{ params.ph_conditions[1] }}</span>
+    soil with a pH ranging from {{ params.min_ph }} to {{ params.max_ph }}.
+    {% endif %}
+</p>
+
+<div id="ph-range" class="value-range">
+    <div class="bar outline rounded background">
+        <div class="value-label-5">0</div>
+        <div class="value-label-5">3</div>
+        <div class="value-label-5">7</div>
+        <div class="value-label-5">10</div>
+        <div class="value-label-5">14</div>
+        <div class="ph-child-bar"
+             style="border-bottom-left-radius: 3px; border-top-left-radius: 3px; width: calc((5 / 14) * 100%); left: 0; background-color: var(--tomato-7);">
+            <!--                            <div class="value-range-label">0</div>-->
+        </div>
+        <div class="ph-child-bar"
+             style="width: calc((1 / 14) * 100%); left: calc(5 / 14 * 100%); background-color: var(--tomato-5);">
+            <!--                            <div class="value-range-label">1</div>-->
+        </div>
+        <div class="ph-child-bar"
+             style="width: calc((2 / 14) * 100%); left: calc(6 / 14 * 100%); background-color: #ffffff;">
+            <!--                            <div class="value-range-label">2</div>-->
+        </div>
+        <div class="ph-child-bar"
+             style="width: calc((1 / 14) * 100%); left: calc(8 / 14 * 100%); background-color: var(--blue-5);">
+            <!--                            <div class="value-range-label">2</div>-->
+        </div>
+        <div class="ph-child-bar"
+             style="border-bottom-right-radius: 3px; border-top-right-radius: 3px; width: calc((5 / 14) * 100%); left: calc(9 / 14 * 100%); background-color: var(--blue-7);">
+            <!--                            <div class="value-range-label">2</div>-->
+        </div>
+    </div>
+
+    <div class="indicator"
+         style="width: calc(({{ params.max_ph }} - {{ params.min_ph }}) / 14 * 100%); left: calc({{ params.min_ph }} / 14 * 100%);">
+        <p>{{ params.min_ph }} - {{ params.max_ph }}</p>
+    </div>
+
+    <div style="margin: 0; margin-top: 2em; padding: 0; display: flex; align-items: start; flex-direction: column">
+        <p style="margin: 0; padding: 0; font-size: 0.7em; color: #7b7b7b;">lower pH = more acidic</p>
+        <p style="margin-top: 0.4em; padding: 0; font-size: 0.7em; color: #7b7b7b;">higher pH = more alkaline</p>
+    </div>
+</div>
+
+{% endmacro %}

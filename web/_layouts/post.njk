@@ -1,0 +1,21 @@
+---
+layout: base.njk
+index: true
+---
+
+
+<div class="page">
+    <div class="page-content">
+        <main id="article" class="guide">
+         
+            {{ content | safe }}
+           
+        </main>
+
+        <div id="table-of-contents">
+            <nav style="width: 5rem;">
+                {{ content | toc | safe }}
+            </nav>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,21 @@
+{% macro map(params) %}
+<div id="map" class="rounded outline flex" style="height: 400px;"></div>
+<script src="/web/assets/js/leaflet.js" defer></script>
+<script defer>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.data) {
+      console.warn("No data found for map.");
+      return;
+    }
+
+    const map = L.map("map").setView([0, 0], 2);
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 10,
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    const geojsonLayer = L.geoJSON(data).addTo(map);
+    map.fitBounds(geojsonLayer.getBounds());
+  });
+</script>
+{% endmacro %}
