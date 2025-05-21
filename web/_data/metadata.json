@@ -1,6 +1,6 @@
 {
     "title": "plantbase",
-    "url": "https://plant-base.github.io",
+    "url": "https://houseplantguide.org",
     "language": "en",
     "description": "Plantbase is a free, open-access platform for reliable houseplant care information — no ads, no products, just facts.",
     "version": "0.1.0",
@@ -10,7 +10,7 @@
         "subtitle": "Plantbase is a free, open-access platform for reliable houseplant care information — no ads, no products, just facts.",
         "filename": "feed.xml",
         "path": "/posts/feed.xml",
-        "url": "https://plantbase.green/posts/feed.xml",
-        "id": "https://plantbase.green/posts/"
+        "url": "https://houseplantguide.org/posts/feed.xml",
+        "id": "https://houseplantguide.org/posts/"
     }
 }
