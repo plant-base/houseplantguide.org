@@ -13,6 +13,10 @@ introduced:
 safe_for_pets: false
 flowering: true
 
+# other
+sources:
+- https://ucanr.edu/blog/uc-master-gardeners-diggin-it-slo/article/golden-mosaic-prayer-plant
+
 tags:
 - ctenanthe
 ---
