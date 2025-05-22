@@ -2,11 +2,11 @@
 name: Ctenanthe setosa
 familia: Marantaceae
 genus: Ctenanthe
-common_names:
+common_names: never never plant
 etymology:
 
 # regions
-native: Brazil South, Brazil Southeast
+native: Brazil Northeast, Brazil South, Brazil Southeast
 introduced:
 
 # characteristics
