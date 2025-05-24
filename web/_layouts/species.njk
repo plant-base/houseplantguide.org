@@ -467,11 +467,8 @@ eleventyComputed:
                         <h3 id="temperature" class="p-0">Temperature</h3>
                         <div>
 
-                            {%- if min_temperature or max_temperature -%}
-
-                            {{ noinfo({ text: "temperature information" }) }}
-
-                            {%- else -%}
+       
+                            {%- if min_temperature and max_temperature -%}
                             <p>{{ name }} prefers temperatures between {{ min_temperature }}°C and {{
                                 max_temperature
                                 }}°C.</p>
@@ -497,6 +494,8 @@ eleventyComputed:
                                         33.8°F</p>
                                 </div>
                             </div>
+
+                            {%- else -%}
 
                             <p>Avoid cold drafts and sudden temperature changes.</p>
 
@@ -595,12 +594,11 @@ eleventyComputed:
                                 {%- endif -%}
 
                                 <!-- PH -->
-                                {%- if min_ph or max_ph -%}
+                                {%- if min_ph and max_ph -%}
 
                                 <!--                        {{ noinfo({ text: "pH information" }) }}-->
 
-                                {%- else -%}
-
+    
                                 {{ ph({ min_ph: min_ph, max_ph: max_ph, ph_conditions: ph_conditions }) }}
 
                                 {%- endif -%}
