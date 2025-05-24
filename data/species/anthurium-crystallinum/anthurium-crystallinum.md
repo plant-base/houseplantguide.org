@@ -2,7 +2,7 @@
 name: Anthurium crystallinum
 familia: Araceae
 genus: Anthurium
-common_names: Anthurium, flaminog flower, flamingo lily, laceleaf, tailflower
+common_names:
 etymology: 
 
 # regions
