@@ -2,7 +2,7 @@
 name: Anthurium crystallinum
 familia: Araceae
 genus: Anthurium
-common_names:
+common_names: splendid flamingo flower
 etymology: 
 
 # regions
