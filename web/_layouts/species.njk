@@ -3,12 +3,12 @@ layout: base.njk
 index: true
 eleventyComputed:
     icon: 🌱
-    title: "{{ name }} Houseplant Care Guide"
+    title: "{{ name }}{% if common_names %} ({{ common_names }}){% endif %}"
     species_slug: "{{ name | slug }}"
     genus_slug: "{{ genus | slug }}"
     familia_slug: "{{ familia | slug }}"
     permalink: /species/{{ species_slug }}/
-    description: "Learn how to care for the {{ name }} houseplant — find care tips about light, water, soil, temperature, toxicity & more."
+    description: "{{ name }} is a {% if flowering %}flowering{% endif %} plant from the {{ familia }} family. Learn how to care for your {{ name }} — find care tips about light, water, soil, temperature, toxicity & more."
 ---
 
 {%- from "components/taxonomy.njk" import taxonomy -%}

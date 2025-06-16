@@ -3,7 +3,7 @@ title: Alocasia nycteris
 name: Alocasia nycteris
 genus: Alocasia
 familia: Araceae
-common_names: bat alocasia or batwing alocasia.
+common_names: bat alocasia, batwing alocasia
 subtitle: Learn how to care for Alocasia nycteris.
 image: true
 etymology: The epithet nycteris refers to the Nycteris genus of bats.
