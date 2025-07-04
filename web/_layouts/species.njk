@@ -8,6 +8,7 @@ eleventyComputed:
     genus_slug: "{{ genus | slug }}"
     familia_slug: "{{ familia | slug }}"
     permalink: /species/{{ species_slug }}/
+    canonical: "https://houseplantguide.org/species/{{species_slug}}/"
     description: "{{ name }} is a {% if flowering %}flowering{% endif %} plant from the {{ familia }} family. Learn how to care for your {{ name }} — find care tips about light, water, soil, temperature, toxicity & more."
 ---
 

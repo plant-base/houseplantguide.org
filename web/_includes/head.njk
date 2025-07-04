@@ -47,8 +47,11 @@
 
 
 <!-- ICONS -->
-<link rel="icon" type="image/x-icon" href="/web/assets/icons/stem_cutting.svg">
+<link rel="icon" href="/web/assets/icons/stem_cutting.ico">
 
+{% if canonical %}
+  <link rel="canonical" href="{{ canonical }}" />
+{% endif %}
 
 <link rel="preload" as="font" href="/web/assets/fonts/icons.woff2?fokozo" type="font/woff2" crossorigin="crossorigin"/>
 
