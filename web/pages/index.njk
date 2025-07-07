@@ -4,6 +4,8 @@ description: Plantbase is a free, open-access platform for reliable houseplant c
 icon: 🌱
 permalink: '/'
 layout: base.njk
+eleventyComputed:
+    canonical: "https://houseplantguide.org/"
 ---
 
 <div class="page">
@@ -15,7 +17,7 @@ layout: base.njk
                     <p style="text-align: center; display: block; margin: 1.3rem 0 1.1rem; font-size: 1rem; line-height: var(--line-height-4); font-weight: 400; letter-spacing: 0.3px;">
                         Learn to take care of your favorite plants.</p>
                     <div style="display: flex; width: 100%; justify-content: center; margin-bottom: 2em;">
-                        <button class="flex" role="button" data-a11y-dialog-show="search-dialog" id="search-button"
+                        <button class="flex" role="button" data-a11y-dialog-show="search-dialog" class="search-button"
                                 type="button">
                             <svg xmlns="http://www.w3.org/2000/svg" height="100%" fill="none" viewBox="0 0 16 17"
                                  style="color: black; width: 1rem; height: 1rem;" aria-hidden="true">
@@ -27,9 +29,9 @@ layout: base.njk
                         </button>
                     </div>
 
-                <p>Plantbase is a plant information platform that aims to <strong>collect, organize and publish</strong> accurate information on how to properly take care of your houseplants.</p>
+                <p>Plantbase is a plant information platform and database that aims to <strong>collect, organize and publish</strong> accurate information on how to properly take care of your houseplants.</p>
                 <p>Our growing database contains detailed information sheets, pictures and care instructions for {{ collections.species.length }} popular houseplant species across {{ collections.genera.length }} genera.</p>
-<p>Below, you can find all plant species grouped by their genus. Click on a species card to find out more about that plant species and learn how to care for them.</p>
+                <p>Below, you can find all plant species grouped by their genus. Click on a species card to find out more about that plant species and learn how to care for them.</p>
                     {%- for c in collections.genera | sort(false, false, "data.name") -%}
 
                     {%- if collections[c.data.genus_slug] | length > 0 -%}
