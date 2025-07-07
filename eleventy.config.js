@@ -591,7 +591,7 @@ outputFiles.forEach((file) => {
 });
 
     eleventyConfig.addPassthroughCopy("CNAME");
-    eleventyConfig.addPassthroughCopy("web/robots.txt");
+    eleventyConfig.addPassthroughCopy("robots.txt");
     
     eleventyConfig.addPassthroughCopy("web/favicon");
     eleventyConfig.addPassthroughCopy("README.md")
