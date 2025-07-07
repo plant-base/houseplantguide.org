@@ -3,7 +3,7 @@ title: Crassula ovata
 name: Crassula ovata
 genus: Crassula
 familia: Crassulaceae
-common_names: jade plant, lucky plant, money plant or money tree.
+common_names: jade plant, lucky plant, money plant, money tree
 subtitle: Learn how to care for Crassula ovata.
 image: true
 etymology: The epithet <i>ovata</i> comes from the Latin word <i>ovatus</i>, meaning <i>egg-shaped</i>.

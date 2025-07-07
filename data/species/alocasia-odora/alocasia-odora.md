@@ -4,7 +4,7 @@ title: Alocasia odora
 name: Alocasia odora
 genus: Alocasia
 familia: Araceae
-common_names: night-scented lily, Asian taro or giant upright elephant ear.
+common_names: night-scented lily, Asian taro, giant upright elephant ear
 subtitle: Learn how to care for Alocasia odora.
 image: true
 etymology: The epithet odora comes from the fact that the flowers that produce a fragrance.

@@ -3,7 +3,7 @@ title: Alocasia wentii
 name: Alocasia wentii
 genus: Alocasia
 familia: Araceae
-common_names: New Guinea shield.
+common_names: New Guinea shield
 subtitle: Learn how to care for Alocasia wentii.
 image: true
 etymology: {}

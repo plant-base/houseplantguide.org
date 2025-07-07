@@ -5,6 +5,8 @@ icon: 🔠
 date: 2023-12-07
 eleventyExcludeFromCollections: false
 permalink: "/posts/terminology/"
+eleventyComputed:
+    canonical: "https://houseplantguide.org/posts/terminology/"
 --- 
 
 # Plant Terminology

@@ -3,7 +3,7 @@ title: Dracaena trifasciata
 name: Dracaena trifasciata
 genus: Dracaena
 familia: Asparagaceae
-common_names: snake plant, Saint George's sword, mother-in-law's tongue, viper's bowstring hemp or Sansevieria trifasciata.
+common_names: snake plant, Saint George's sword, mother-in-law's tongue, viper's bowstring hemp, Sansevieria trifasciata
 subtitle: Learn how to care for Dracaena trifasciata.
 image: true
 etymology: The epithet <i>trifasciata</i> means <i>three bundles</i> and refers to the flowers which are grouped in threes.

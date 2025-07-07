@@ -4,7 +4,7 @@ title: Alocasia sanderiana
 name: Alocasia sanderiana
 genus: Alocasia
 familia: Araceae
-common_names: kris plant or Sander's alocasia.
+common_names: kris plant, Sander's alocasia.
 subtitle: Learn how to care for Alocasia sanderiana.
 image: true
 etymology: The epithet sanderiana refers to German-English gardener 'Henry Frederick Conrad Sander (1847 - 1920)'.

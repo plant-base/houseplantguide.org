@@ -3,7 +3,7 @@ layout: base.njk
 index: true
 eleventyComputed:
     icon: 🌱
-    title: "{{ name }}{% if common_names %} ({{ common_names }}){% endif %}"
+    title: "{{ name }}{% if common_names %} ({{ common_names | limitItems: 2 }}){% endif %}"
     species_slug: "{{ name | slug }}"
     genus_slug: "{{ genus | slug }}"
     familia_slug: "{{ familia | slug }}"

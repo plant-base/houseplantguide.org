@@ -487,7 +487,16 @@ a:hover {
     justify-content: start;
 }
 
+.nav-bar-content #logo-mobile {
+    justify-content: start;
+}
+
 .nav-bar-content #nav-end {
+    justify-content: end;
+}
+
+
+.nav-bar-content #nav-end-mobile {
     justify-content: end;
 }
 
@@ -2209,6 +2218,17 @@ a {
     display: none;
 }
 
+#search-button-mobile {
+    padding: 0.3em 1em;
+    background: var(--search-box-bg);
+    border-radius: 8px;
+    color: var(--search-box-outline);
+    font-size: small;
+    border: 1px solid transparent;
+    margin: 0;
+    height: 2.6em;
+}
+
 #search-button {
     padding: 0.3em 1em;
     background: var(--search-box-bg);
@@ -2218,6 +2238,18 @@ a {
     border: 1px solid transparent;
     margin: 0;
     height: 2.6em;
+}
+
+#search-button-mobile, small {
+    padding: 0 0.6em;
+}
+
+#search-button-mobile, [role=button] {
+    cursor: pointer;
+}
+
+#search-button-mobile:hover {
+    border: 1px solid var(--search-box-outline);
 }
 
 #search-button, small {
@@ -2413,19 +2445,20 @@ kbd {
     color: var(--text-primary);
 }
 
-#menu-toggle ~ #navbar-mobile #nav-end .icon-unchecked {
+
+#menu-toggle ~ #navbar-mobile #nav-end-mobile .icon-unchecked {
     display: block;
 }
 
-#menu-toggle:checked ~ #navbar-mobile #nav-end .icon-unchecked {
+#menu-toggle:checked ~ #navbar-mobile #nav-end-mobile .icon-unchecked {
     display: none;
 }
 
-#menu-toggle ~ #navbar-mobile #nav-end .icon-checked {
+#menu-toggle ~ #navbar-mobile #nav-end-mobile .icon-checked {
     display: none;
 }
 
-#menu-toggle:checked ~ #navbar-mobile #nav-end .icon-checked {
+#menu-toggle:checked ~ #navbar-mobile #nav-end-mobile .icon-checked {
     display: block;
 }
 

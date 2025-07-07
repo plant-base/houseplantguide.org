@@ -3,7 +3,7 @@ title: Sedum adolphi
 name: Sedum adolphi
 genus: Sedum
 familia: Crassulaceae
-common_names: coppertone stonecrop or golden Sedum.
+common_names: coppertone stonecrop,golden Sedum.
 subtitle: Learn how to care for Sedum adolphi.
 image: true
 etymology: The epithet <i>adolphi</i> refers to German botanist <i>Heinrich Gustav Adolf Engler (1844 - 1930)</i>.

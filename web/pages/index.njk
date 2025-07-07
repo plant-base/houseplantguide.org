@@ -29,7 +29,7 @@ layout: base.njk
 
                 <p>Plantbase is a plant information platform that aims to <strong>collect, organize and publish</strong> accurate information on how to properly take care of your houseplants.</p>
                 <p>Our growing database contains detailed information sheets, pictures and care instructions for {{ collections.species.length }} popular houseplant species across {{ collections.genera.length }} genera.</p>
-<p>Below, you can find all plant species grouped by their genus.</p>
+<p>Below, you can find all plant species grouped by their genus. Click on a species card to find out more about that plant species and learn how to care for them.</p>
                     {%- for c in collections.genera | sort(false, false, "data.name") -%}
 
                     {%- if collections[c.data.genus_slug] | length > 0 -%}
@@ -57,6 +57,10 @@ layout: base.njk
                         </div>
                         {%- endif -%}
                     {%- endfor -%}
+
+
+
+                    
                 </div>
             </div>
         </main>

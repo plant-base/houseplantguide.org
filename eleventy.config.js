@@ -13,7 +13,8 @@ const {
     minifyCss,
     formatDate,
     htmlDateString,
-    joinWithAnd
+    joinWithAnd,
+    limitItems
 } = require('./web/_config/filters.js');
 
 function wrapImageInFigure(image, caption, style = '') {
@@ -490,6 +491,7 @@ module.exports = eleventyConfig => {
     eleventyConfig.addFilter("prettydate", formatDate);
     eleventyConfig.addFilter('htmlDateString', htmlDateString);
     eleventyConfig.addFilter('joinWithAnd', joinWithAnd);
+     eleventyConfig.addFilter('limitItems', limitItems);
 
     eleventyConfig.addFilter("limit", function(array, limit) {
         return array.slice(0, limit);

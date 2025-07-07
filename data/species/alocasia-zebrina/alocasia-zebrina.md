@@ -3,7 +3,7 @@ title: Alocasia zebrina
 name: Alocasia zebrina
 genus: Alocasia
 familia: Araceae
-common_names: zebra plant, zebrina alocasia or gabing tigre.
+common_names: zebra plant, zebrina alocasia, gabing tigre
 subtitle: Learn how to care for Alocasia zebrina.
 image: true
 etymology: The epithet zebrina refers to the distinctive striped leaf stalks of this plant which resemble the coat of a Zebra.

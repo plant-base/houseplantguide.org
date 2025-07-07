@@ -3,7 +3,7 @@ title: Chlorophytum comosum
 name: Chlorophytum comosum
 genus: Chlorophytum
 familia: Asparagaceae
-common_names: spider plant, common spider plant, spider ivy, airplane plant, ribbon plant or hen and chickens.
+common_names: spider plant, common spider plant, spider ivy, airplane plant, ribbon plant, hen and chickens
 subtitle: Learn how to care for Chlorophytum comosum.
 image: true
 etymology: The epithet <i>comosum</i> comes from the Latin word <i>comosus</i>, meaning 'having long or abundant hair'.

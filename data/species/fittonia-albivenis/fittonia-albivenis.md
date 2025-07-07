@@ -3,7 +3,7 @@ title: Fittonia albivenis
 name: Fittonia albivenis
 genus: Fittonia
 familia: Acanthaceae
-common_names: nerve plant or mosaic plant.
+common_names: nerve plant, mosaic plant
 subtitle: Learn how to care for Fittonia albivenis.
 image: true
 etymology: The epithet <i>albivenis</i> comes from the Latin words alba (meaning white) and vena (meaning blood-vessel, vein).

@@ -1,5 +1,5 @@
 ---
 name: Asparagaceae
-common_names: the asparagus family.
+common_names: the asparagus family
 etymology: 
 ---
