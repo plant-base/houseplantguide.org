@@ -557,6 +557,7 @@ module.exports = (eleventyConfig) => {
 
     eleventyConfig.addPassthroughCopy("CNAME");
     eleventyConfig.addPassthroughCopy("robots.txt");
+    eleventyConfig.addPassthroughCopy("./web/assets/icons/favicon.png");
 
     eleventyConfig.addPassthroughCopy("web/favicon");
     // eleventyConfig.addPassthroughCopy("README.md");
