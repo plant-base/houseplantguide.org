@@ -3,13 +3,13 @@ layout: base.njk
 index: true
 eleventyComputed:
     icon: 🌱
-    title: "{{ name }}{% if common_names %} ({{ common_names | limitItems: 2 }}){% endif %}"
+    title: "How to care for {{ name }}{% if common_names %} ({{ common_names | limitItems: 2 }}){% endif %}"
     species_slug: "{{ name | slug }}"
     genus_slug: "{{ genus | slug }}"
     familia_slug: "{{ familia | slug }}"
     permalink: /species/{{ species_slug }}/
     canonical: "https://houseplantguide.org/species/{{species_slug}}/"
-    description: "{{ name }} is a {% if flowering %}flowering{% endif %} plant from the {{ familia }} family. Learn how to care for your {{ name }} — find care tips about light, water, soil, temperature, toxicity & more."
+    description: "How to care for {{ name }}{% if common_names %} ({{ common_names | limitItems: 2 }}){% endif %}? {{ name }} is a {% if flowering %}flowering{% endif %} plant from the {{ familia }} family. Learn how to care for your {{ name }} — find care tips about light, water, soil, temperature, toxicity & more."
 ---
 
 {%- from "components/taxonomy.njk" import taxonomy -%}
@@ -71,7 +71,7 @@ eleventyComputed:
 
             <!-- GENERAL INFO -->
             <div id="description-cards" class="flex row gap">
-              
+
 
  {%- set has_image = species_slug | checkSpeciesImage %}
                 {%- if has_image -%}
@@ -84,7 +84,7 @@ eleventyComputed:
                 {%- endif -%}
 
 
-               
+
 
                 <div class="flex column expand small-gap">
                     <!-- TAXONOMY CARD-->
@@ -468,7 +468,7 @@ eleventyComputed:
                         <h3 id="temperature" class="p-0">Temperature</h3>
                         <div>
 
-       
+
                             {%- if min_temperature and max_temperature -%}
                             <p>{{ name }} prefers temperatures between {{ min_temperature }}°C and {{
                                 max_temperature
@@ -599,7 +599,7 @@ eleventyComputed:
 
                                 <!--                        {{ noinfo({ text: "pH information" }) }}-->
 
-    
+
                                 {{ ph({ min_ph: min_ph, max_ph: max_ph, ph_conditions: ph_conditions }) }}
 
                                 {%- endif -%}
@@ -943,9 +943,9 @@ eleventyComputed:
                     <li><a href="#related-species">Related species</a></li>
                      {%- endif -%}
                     <li><a href="#sources">Sources</a></li>
-                    
+
                 </ul>
-                
+
 
             </nav>
             <button id="share-button" class="small">Share this plant</button>
