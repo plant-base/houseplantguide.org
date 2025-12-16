@@ -559,7 +559,6 @@ module.exports = (eleventyConfig) => {
     eleventyConfig.addPassthroughCopy("robots.txt");
     eleventyConfig.addPassthroughCopy("./web/assets/icons/favicon.png");
 
-    eleventyConfig.addPassthroughCopy("web/favicon");
     // eleventyConfig.addPassthroughCopy("README.md");
 
     // Define a filter to check if the image exists
